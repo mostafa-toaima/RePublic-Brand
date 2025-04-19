@@ -1,0 +1,21 @@
+<div class="country-perfumes-container">
+  <div class="header-section">
+    <h1>Perfumes from {{ country }}</h1>
+    <p class="subtitle">Discover the unique fragrances inspired by this region</p>
+    <a routerLink="/" class="back-link">← Back to World Map</a>
+  </div>
+
+  <div *ngIf="isLoading" class="loading">
+    <div class="spinner"></div>
+    <p>Loading perfumes...</p>
+  </div>
+
+  <div *ngIf="!isLoading && perfumes.length === 0" class="no-perfumes">
+    <p>No perfumes found for this country.</p>
+    <a routerLink="/" class="back-link">← Back to World Map</a>
+  </div>
+
+  <div class="perfumes-grid" *ngIf="!isLoading && perfumes.length > 0">
+    <app-perfume-card *ngFor="let perfume of perfumes" [perfume]="perfume"></app-perfume-card>
+  </div>
+</div>

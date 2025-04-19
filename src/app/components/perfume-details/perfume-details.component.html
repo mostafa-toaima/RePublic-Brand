@@ -1,0 +1,35 @@
+<div class="perfume-details-container" *ngIf="perfume">
+  <div class="perfume-image">
+    <img [src]="perfume.imageUrl" [alt]="perfume.name">
+  </div>
+
+  <div class="perfume-info">
+    <h2>{{ perfume.name }}</h2>
+    <p class="country">{{ perfume.country }}</p>
+    <p class="description">{{ perfume.description }}</p>
+    <p class="price">${{ perfume.price.toFixed(2) }}</p>
+
+    <div class="features">
+      <span class="feature-tag" *ngFor="let feature of perfume.features">{{ feature }}</span>
+    </div>
+
+    <div class="notes-section">
+      <div class="note-pyramid">
+        <div class="pyramid-level top-notes">
+          <h4>Top Notes</h4>
+          <div class="note" *ngFor="let note of perfume.notes.top">{{ note }}</div>
+        </div>
+        <div class="pyramid-level middle-notes">
+          <h4>Heart Notes</h4>
+          <div class="note" *ngFor="let note of perfume.notes.middle">{{ note }}</div>
+        </div>
+        <div class="pyramid-level base-notes">
+          <h4>Base Notes</h4>
+          <div class="note" *ngFor="let note of perfume.notes.base">{{ note }}</div>
+        </div>
+      </div>
+    </div>
+
+    <button class="add-to-cart">Add to Cart</button>
+  </div>
+</div>

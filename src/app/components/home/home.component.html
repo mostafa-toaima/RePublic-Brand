@@ -1,0 +1,43 @@
+<div class="landing-container">
+  <div class="background-image"></div>
+  <div class="content">
+    <h1 class="heading">Discover the World of Scents</h1>
+    <p class="subheading">Premium fragrances from around the globe</p>
+    <button class="cta-button">
+      Explore Collection
+    </button>
+  </div>
+</div>
+<div class="home-container">
+  <section class="map-section">
+    <h2>Explore by Country</h2>
+    <p class="section-description">Click on a highlighted country to discover its unique fragrances</p>
+    <div class="map-wrapper">
+      <app-country-map (countrySelected)="onCountrySelected($event)"></app-country-map>
+    </div>
+  </section>
+
+  <!-- Gender Categories Section -->
+  <section class="gender-categories">
+    <div class="category-card for-him">
+      <div class="category-content">
+        <h3>For Him</h3>
+        <p>Discover masculine scents that command attention</p>
+        <button class="category-btn">Shop Men's Fragrances</button>
+      </div>
+    </div>
+
+    <div class="category-card for-her">
+      <div class="category-content">
+        <h3>For Her</h3>
+        <p>Explore feminine fragrances that captivate</p>
+        <button class="category-btn">Shop Women's Fragrances</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="loading-section" *ngIf="isLoading">
+    <div class="spinner"></div>
+    <p>Loading fragrances...</p>
+  </section>
+</div>
