@@ -1,4 +1,4 @@
-@import '../../../assets/styles/vars.scss'; // Assuming you have a variables file
+@import '../../../../assets/styles/vars.scss'; // Assuming you have a variables file
 
 .products-page {
   font-family: 'Montserrat', sans-serif;
@@ -19,7 +19,7 @@
 .products-hero {
   height: 400px;
   background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
-    url('../../../assets/images/hero1.jpg') center/cover;
+    url('../../../../assets/images/hero1.jpg') center/cover;
   display: flex;
   align-items: center;
   position: relative;

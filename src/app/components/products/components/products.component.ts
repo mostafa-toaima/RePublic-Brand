@@ -1,7 +1,8 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { PerfumeService } from '../../common/services/perfume.service';
-import { Perfume } from '../../common/models/perfume.model';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Perfume } from '../../../common/models/perfume.model';
+import { PerfumeService } from '../../../common/services/perfume.service';
+
 
 @Component({
   selector: 'app-products',
@@ -16,29 +17,28 @@ export class ProductsComponent implements OnInit {
   categories: string[] = [];
   countries: string[] = [];
 
-  // Pagination
   currentPage: number = 1;
-  productsPerPage: number = 12;
+  productsPerPage: number = 4;
   totalPages: number = 1;
 
-  // Filters
   selectedCategory: string = 'all';
   selectedCountry: string = 'all';
   sortOption: string = 'featured';
   showFilter: boolean = false;
 
   perfumeService = inject(PerfumeService)
-  constructor(private router: Router) { }
+  constructor(private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.loadProducts();
-
+    this.route.queryParamMap.subscribe(params => {
+      if (params.has('type')) {
+        this.selectedCategory = params.get('type') || 'all';
+      }
+      this.loadProducts();
+    });
   }
-
   loadProducts(): void {
     this.isLoading = true;
-
-    // Simulate API call with timeout
     setTimeout(() => {
       this.perfumeService.getAllPerfumes().subscribe((products: Perfume[]) => {
         this.allProducts = products;
@@ -59,19 +59,13 @@ export class ProductsComponent implements OnInit {
   }
 
   applyFilters(): void {
-    // Apply category filter
     let filtered = this.allProducts;
-
     if (this.selectedCategory !== 'all') {
       filtered = filtered.filter(p => p.category === this.selectedCategory);
     }
-
-    // Apply country filter
     if (this.selectedCountry !== 'all') {
       filtered = filtered.filter(p => p.country === this.selectedCountry);
     }
-
-    // Apply sorting
     switch (this.sortOption) {
       case 'price-low':
         filtered.sort((a, b) => a.price - b.price);
@@ -86,10 +80,8 @@ export class ProductsComponent implements OnInit {
         filtered.sort((a, b) => b.name.localeCompare(a.name));
         break;
       default:
-        // 'featured' - default sorting
         break;
     }
-
     this.filteredProducts = filtered;
     this.currentPage = 1;
     this.updatePagination();
@@ -122,10 +114,6 @@ export class ProductsComponent implements OnInit {
     }
   }
 
-  viewProductDetails(productId: number): void {
-    this.router.navigate(['/product', productId]);
-  }
-
   addToCart(product: Perfume): void {
     // In a real app, you would call your cart service here
     console.log('Added to cart:', product);
@@ -142,5 +130,12 @@ export class ProductsComponent implements OnInit {
     this.selectedCountry = 'all';
     this.sortOption = 'featured';
     this.applyFilters();
+  }
+
+  scrollToContent() {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
   }
 }

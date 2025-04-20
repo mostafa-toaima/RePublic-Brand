@@ -28,6 +28,7 @@ export class HomeComponent implements OnInit {
     this.router.events
       .pipe(filter((event: any) => event instanceof NavigationEnd))
       .subscribe(() => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
         if (window.location.hash) {
           setTimeout(() => {
             document.querySelector(window.location.hash)?.scrollIntoView({
@@ -42,10 +43,12 @@ export class HomeComponent implements OnInit {
     this.router.navigate(['/country', country]);
   }
 
-
-  scrollToContent() {
-    document.getElementById('main-content')?.scrollIntoView({
-      behavior: 'smooth'
-    });
+  exploreCollection() {
+    this.router.navigate(['/products']);
   }
+  exploreCollectionFor(type: string) {
+    this.router.navigate(['/products'], { queryParams: { type } });
+  }
+
+
 }

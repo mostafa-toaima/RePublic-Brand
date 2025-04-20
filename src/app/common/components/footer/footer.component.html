@@ -1,19 +1,22 @@
 <footer class="site-footer">
   <div class="footer-container">
-    <!-- Main Footer Content -->
     <div class="footer-main">
       <div class="footer-brand">
         <h3 class="footer-logo">Scents of the World</h3>
         <p class="footer-tagline">Discover premium fragrances from every corner
           of the globe</p>
         <div class="social-links">
-          <a href="#" aria-label="Facebook"><i
-              class="fab fa-facebook-f"></i></a>
-          <a href="#" aria-label="Instagram"><i
-              class="fab fa-instagram"></i></a>
-          <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-          <a href="#" aria-label="Pinterest"><i
-              class="fab fa-pinterest-p"></i></a>
+          <a href="https://www.facebook.com/share/19D416MMYu/" target="_blank"
+            aria-label="Facebook"><i
+              class="bi bi-facebook"></i></a>
+          <a
+            href="https://www.instagram.com/republic_fragrances_?igsh=YXVid3B2MHN4N3k1"
+            target="_blank" aria-label="Instagram"><i
+              class="bi bi-instagram"></i></a>
+          <a
+            href="https://www.tiktok.com/@republic.fragranc?_t=ZS-8u55Lb146it&_r=1"
+            target="_blank" aria-label="Instagram"><i
+              class="bi bi-tiktok"></i></a>
         </div>
       </div>
 
@@ -21,55 +24,13 @@
         <div class="links-column">
           <h4 class="links-title">Shop</h4>
           <ul>
-            <li><a href="#">New Arrivals</a></li>
-            <li><a href="#">Best Sellers</a></li>
-            <li><a href="#">For Men</a></li>
-            <li><a href="#">For Women</a></li>
-            <li><a href="#">Gift Sets</a></li>
+            <li (click)="exploreCollectionFor('men')"><a>For Men</a></li>
+            <li (click)="exploreCollectionFor('woman')"><a>For Women</a></li>
           </ul>
         </div>
-
-        <div class="links-column">
-          <h4 class="links-title">About</h4>
-          <ul>
-            <li><a href="#">Our Story</a></li>
-            <li><a href="#">Sustainability</a></li>
-            <li><a href="#">Ingredients</a></li>
-            <li><a href="#">Blog</a></li>
-            <li><a href="#">Press</a></li>
-          </ul>
-        </div>
-
-        <div class="links-column">
-          <h4 class="links-title">Help</h4>
-          <ul>
-            <li><a href="#">Contact Us</a></li>
-            <li><a href="#">FAQs</a></li>
-            <li><a href="#">Shipping</a></li>
-            <li><a href="#">Returns</a></li>
-            <li><a href="#">Track Order</a></li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="footer-newsletter">
-        <h4 class="newsletter-title">Stay Connected</h4>
-        <p>Subscribe for exclusive offers and fragrance tips</p>
-        <form class="newsletter-form">
-          <input type="email" placeholder="Your email address" required>
-          <button type="submit">Subscribe</button>
-        </form>
       </div>
     </div>
-
-    <!-- Footer Bottom -->
     <div class="footer-bottom">
-
-      <div class="legal-links">
-        <a href="#">Privacy Policy</a>
-        <a href="#">Terms of Service</a>
-        <a href="#">Cookie Policy</a>
-      </div>
       <div class="copyright">
         &copy; {{ currentYear }} Scents of the World. All rights reserved.
       </div>

@@ -2,6 +2,8 @@
   class="navbar navbar-expand-sm bg-transparent shadow-lg custom-navbar fixed-top">
   <div class="container-fluid">
     <img src="assets/images/logo.jpg" class="logo" alt="RePublic">
+
+    <!-- Toggler -->
     <button class="navbar-toggler" type="button"
       data-bs-toggle="collapse"
       data-bs-target="#navbarNav"
@@ -11,19 +13,22 @@
       <span class="navbar-toggler-icon custom-navbar-toggler-icon"
         (click)="collapseNavbar()"></span>
     </button>
+
+    <!-- Collapsible nav content -->
     <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+      <ul class="navbar-nav mb-2 mb-lg-0">
         <li class="nav-item">
           <a class="nav-link active" routerLink="/home"
-            routerLinkActive="active"
-            (click)="collapseNavbar()">Home</a>
+            routerLinkActive="active" (click)="collapseNavbar()">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="/products"
-            routerLinkActive="active">Products</a>
+          <a class="nav-link" routerLink="/products" routerLinkActive="active"
+            (click)="collapseNavbar()">Products</a>
         </li>
       </ul>
-      <div class="dropdown ms-auto me-2">
+
+      <!-- Categories dropdown -->
+      <div class="dropdown me-3">
         <button class="btn dropdown-toggle" type="button"
           id="dropdownMenuButton1"
           data-bs-toggle="dropdown"
@@ -31,15 +36,28 @@
           Categories
         </button>
         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-          <li><a class="dropdown-item" routerLink="/home"
-              routerLinkActive="active">For Him</a></li>
-          <li><a class="dropdown-item" routerLink="/home"
-              routerLinkActive="active">For Her</a></li>
-          <li><a class="dropdown-item" routerLink="/home"
-              routerLinkActive="active">Offers</a></li>
+          <li (click)="exploreCollectionFor('men')"><a class="dropdown-item"
+              routerLink="/home"
+              routerLinkActive="active" (click)="collapseNavbar()">For
+              Him</a></li>
+          <li (click)="exploreCollectionFor('woman')"><a class="dropdown-item"
+              routerLink="/home"
+              routerLinkActive="active" (click)="collapseNavbar()">For
+              Her</a></li>
+
         </ul>
       </div>
+    </div>
 
+    <!-- Cart icon -->
+    <div class="cart-icon ms-2 m-2">
+      <button class="btn position-relative" (click)="openCart()">
+        <i class="bi bi-cart3 fs-4 text-light"></i>
+        <span
+          class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+          {{ cartItemCount }}
+        </span>
+      </button>
     </div>
   </div>
 </nav>

@@ -1,69 +1,106 @@
-.custom-navbar{
+.custom-navbar {
   background-color: #000000a6 !important;
   backdrop-filter: blur(10px) !important;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1) !important;
-  img{
+
+  img {
     width: 50px;
     height: 50px;
     margin: 0 20px;
     border-radius: 50%;
     transition: all 0.3s ease-in-out;
-    &:hover{
+
+    &:hover {
       transform: scale(1.2);
     }
   }
-  li{
+
+  li {
     margin: 0 10px;
     font-size: 16px;
     font-weight: 500;
     text-transform: uppercase;
     transition: all 0.3s ease-in-out;
-    &:hover{
+
+    &:hover {
       transform: scale(1.2);
     }
-    &.active{
+
+    &.active {
       color: #f8f9fa !important;
       transform: scale(1.1);
     }
   }
-  a{
-    color:  #f8f9fa !important;
+
+  a {
+    color: #f8f9fa !important;
     text-decoration: none;
-    &:hover{
+
+    &:hover {
       color: #f8f9fa !important;
       text-decoration: none;
     }
-
-
   }
 
-  .navbar-toggler{
+  .navbar-toggler {
     border: none !important;
-    &:focus{
+
+    &:focus {
       outline: none !important;
       box-shadow: none !important;
     }
   }
-  .dropdown-menu{
+
+  .dropdown-menu {
     a {
-      color:#000 !important;
-  }
-}
-}
-.dropdown-toggle{
-  color: beige !important;
-}
-
-@media (max-width: 768px) {
-  .custom-navbar{
-    #navbarNav{
-      padding: 20px;
-      border-radius: 15px;
-
+      color: #000 !important;
+      background-color: #f8f9fa !important;
     }
   }
 }
 
-.custom-navbar-toggler-icon{
-  border: 1px solid wheat ;
+.dropdown-toggle {
+  color: beige !important;
+
+  .dropdown-item.active {
+    background-color: #000 !important;
+    color: #f8f9fa !important;
+
+  }
+}
+
+.custom-navbar-toggler-icon {
+  border: 1px solid wheat;
+}
+
+/* Cart icon style */
+.cart-icon {
+  .btn {
+    color: #f8f9fa;
+    padding: 0.3rem 0.6rem;
+
+    i {
+      transition: transform 0.3s ease;
+    }
+
+    &:hover i {
+      transform: scale(1.2);
+    }
+
+    .badge {
+      font-size: 0.6rem;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .custom-navbar {
+    #navbarNav {
+      padding: 20px;
+      border-radius: 15px;
+    }
+  }
+  .logo{
+    display: none;
+  }
 }

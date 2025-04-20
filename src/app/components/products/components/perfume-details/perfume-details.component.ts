@@ -1,4 +1,6 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Perfume } from '../../../../common/models/perfume.model';
+import { ProductsService } from './../../services/products.service';
+import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-perfume-details',
@@ -13,7 +15,7 @@ export class PerfumeDetailsComponent {
 
   selectedImage: string = '';
   selectedSize: string = '';
-
+  productSerivce = inject(ProductsService);
   ngOnInit() {
     if (this.perfume && this.perfume.images && this.perfume.images.length > 0) {
       this.selectedImage = this.perfume.images[0];
@@ -53,4 +55,5 @@ export class PerfumeDetailsComponent {
       selectedSize: this.selectedSize
     });
   }
+
 }

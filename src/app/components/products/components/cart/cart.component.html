@@ -1,0 +1,221 @@
+<div class="cart-container">
+  <div class="cart-header">
+    <h1>Your Fragrance Collection</h1>
+    <div class="cart-steps">
+      <div class="step active"><span>1</span> Your Selection</div>
+      <div class="step"><span>2</span> Checkout</div>
+      <div class="step"><span>3</span> Confirmation</div>
+    </div>
+  </div>
+
+  <div *ngIf="cartItems.length === 0 && !orderSubmitted" class="empty-cart">
+    <div class="empty-cart-icon">
+      <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="#d1a054" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="10" cy="20.5" r="1"/><circle cx="18" cy="20.5" r="1"/>
+        <path d="M2.5 2.5h3l2.7 12.4a2 2 0 0 0 2 1.6h7.7a2 2 0 0 0 2-1.6l1.6-8.4H7.1"/>
+      </svg>
+    </div>
+    <h2>Your Fragrance Wardrobe is Empty</h2>
+    <p>Discover our exquisite collection to find your signature scent</p>
+    <a routerLink="/products" class="continue-shopping-btn">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline>
+      </svg>
+      Explore Our Collection
+    </a>
+  </div>
+
+  <div *ngIf="orderSubmitted" class="order-confirmation">
+    <div class="confirmation-card">
+      <div class="confirmation-icon success">
+        <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="#4CAF50" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+          <polyline points="22 4 12 14.01 9 11.01"></polyline>
+        </svg>
+      </div>
+      <h2>Your Order is Complete!</h2>
+      <p class="confirmation-text">Thank you for choosing our fragrances. Your order #{{orderId}} is being prepared.</p>
+      <p class="confirmation-details">We've sent a confirmation to your email. Our fragrance specialists will contact you shortly to finalize delivery details.</p>
+      <div class="confirmation-actions">
+        <a routerLink="/orders" class="view-orders-btn">Track Your Order</a>
+        <a routerLink="/products" class="continue-shopping-btn">Discover More Scents</a>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="cartItems.length > 0 && !orderSubmitted" class="cart-content">
+    <div class="cart-items-section">
+      <div class="cart-items-header">
+        <h3>Your Selected Fragrances</h3>
+        <div class="header-details">
+          <span>Qty</span>
+          <span>Total</span>
+        </div>
+      </div>
+
+      <div class="cart-items-list">
+        <div *ngFor="let item of cartItems; trackBy: trackByPerfumeId" class="cart-item-card">
+          <div class="item-image-container">
+            <img [src]="item.perfume.images[1]" [alt]="item.perfume.name" class="item-image">
+            <button class="remove-item-btn" (click)="removeFromCart(item.perfume)" aria-label="Remove item">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line>
+              </svg>
+            </button>
+          </div>
+          <div class="item-details">
+            <h4 class="item-name">{{ item.perfume.name }}</h4>
+            <p class="item-brand">{{ item.perfume.category }}</p>
+            <p class="item-size">{{ item.perfume.price || '100' }}ml</p>
+            <p class="item-price">{{ item.perfume.price | currency:'USD':'symbol':'1.2-2' }}</p>
+          </div>
+          <div class="item-quantity-control">
+            <button class="quantity-btn minus"  [disabled]="item.quantity <= 1">-</button>
+            <span class="quantity-value">{{ item.quantity }}</span>
+            <button class="quantity-btn plus">+</button>
+          </div>
+          <div class="item-total-price">
+            {{ item.perfume.price * item.quantity | currency:'USD':'symbol':'1.2-2' }}
+          </div>
+        </div>
+      </div>
+
+      <div class="cart-continue-shopping">
+        <a routerLink="/products" class="continue-shopping-link">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline>
+          </svg>
+          Continue Exploring
+        </a>
+      </div>
+    </div>
+
+    <div class="checkout-summary">
+      <div class="summary-card">
+        <h3 class="summary-title">Order Summary</h3>
+
+        <div class="summary-row">
+          <span>Subtotal ({{cartItems.length}} items)</span>
+          <span>{{ totalPrice | currency:'USD':'symbol':'1.2-2' }}</span>
+        </div>
+        <div class="summary-row">
+          <span>Shipping</span>
+          <span class="free-shipping">Complimentary</span>
+        </div>
+        <div class="summary-row">
+          <span>Estimated Tax</span>
+          <span>{{ totalPrice * 0.08 | currency:'USD':'symbol':'1.2-2' }}</span>
+        </div>
+
+        <div class="summary-total">
+          <span>Total</span>
+          <span class="total-amount">{{ totalPrice * 1.08 | currency:'USD':'symbol':'1.2-2' }}</span>
+        </div>
+
+        <form [formGroup]="checkoutForm" (ngSubmit)="onSubmit()" class="checkout-form">
+          <div class="form-group">
+            <label for="firstName">First Name</label>
+            <input type="text" id="firstName" formControlName="firstName" [class.invalid]="checkoutForm.get('firstName')?.invalid && checkoutForm.get('firstName')?.touched">
+            <div *ngIf="checkoutForm.get('firstName')?.invalid && checkoutForm.get('firstName')?.touched" class="error-message">
+              Please enter your first name
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="lastName">Last Name</label>
+            <input type="text" id="lastName" formControlName="lastName" [class.invalid]="checkoutForm.get('lastName')?.invalid && checkoutForm.get('lastName')?.touched">
+            <div *ngIf="checkoutForm.get('lastName')?.invalid && checkoutForm.get('lastName')?.touched" class="error-message">
+              Please enter your last name
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" formControlName="email" [class.invalid]="checkoutForm.get('email')?.invalid && checkoutForm.get('email')?.touched">
+            <div *ngIf="checkoutForm.get('email')?.invalid && checkoutForm.get('email')?.touched" class="error-message">
+              Please enter a valid email address
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="phone">Phone Number</label>
+            <input type="tel" id="phone" formControlName="phone" [class.invalid]="checkoutForm.get('phone')?.invalid && checkoutForm.get('phone')?.touched">
+            <div *ngIf="checkoutForm.get('phone')?.invalid && checkoutForm.get('phone')?.touched" class="error-message">
+              Please enter a valid phone number
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="address">Delivery Address</label>
+            <input type="text" id="address" formControlName="address" [class.invalid]="checkoutForm.get('address')?.invalid && checkoutForm.get('address')?.touched">
+            <div *ngIf="checkoutForm.get('address')?.invalid && checkoutForm.get('address')?.touched" class="error-message">
+              Please enter your delivery address
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="city">City</label>
+              <input type="text" id="city" formControlName="city" [class.invalid]="checkoutForm.get('city')?.invalid && checkoutForm.get('city')?.touched">
+              <div *ngIf="checkoutForm.get('city')?.invalid && checkoutForm.get('city')?.touched" class="error-message">
+                Please enter your city
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="zipCode">ZIP Code</label>
+              <input type="text" id="zipCode" formControlName="zipCode" [class.invalid]="checkoutForm.get('zipCode')?.invalid && checkoutForm.get('zipCode')?.touched">
+              <div *ngIf="checkoutForm.get('zipCode')?.invalid && checkoutForm.get('zipCode')?.touched" class="error-message">
+                Please enter your ZIP code
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="notes">Special Instructions (Optional)</label>
+            <textarea id="notes" formControlName="notes" rows="3"></textarea>
+          </div>
+
+          <div class="payment-methods">
+            <h4>Payment Method</h4>
+            <div class="payment-options">
+              <label class="payment-option" [class.selected]="paymentMethod === 'cash'">
+                <input type="radio" name="payment" value="cash" [(ngModel)]="paymentMethod" [ngModelOptions]="{standalone: true}">
+                <div class="payment-content">
+                  <span>Cash on Delivery</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <path d="M8 14s1.5 2 4 2 4-2 4-2"></path>
+                    <line x1="9" y1="9" x2="9.01" y2="9"></line><line x1="15" y1="9" x2="15.01" y2="9"></line>
+                  </svg>
+                </div>
+              </label>
+              <label class="payment-option disabled">
+                <input type="radio" name="payment" value="card" disabled>
+                <div class="payment-content">
+                  <span>Credit Card (Coming Soon)</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect>
+                    <line x1="1" y1="10" x2="23" y2="10"></line>
+                  </svg>
+                </div>
+              </label>
+            </div>
+          </div>
+
+          <button type="submit" class="checkout-btn" [disabled]="checkoutForm.invalid || isLoading">
+            <span *ngIf="!isLoading">Complete Your Order</span>
+            <span *ngIf="isLoading" class="loading-spinner"></span>
+          </button>
+
+          <div class="secure-checkout">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+            </svg>
+            <span>Secure Checkout</span>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

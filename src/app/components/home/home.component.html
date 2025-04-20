@@ -3,7 +3,7 @@
   <div class="content">
     <h1 class="heading">Discover the World of Scents</h1>
     <p class="subheading">Premium fragrances from around the globe</p>
-    <button class="cta-button">
+    <button class="cta-button" (click)="exploreCollection()">
       Explore Collection
     </button>
   </div>
@@ -11,9 +11,11 @@
 <div class="home-container">
   <section class="map-section">
     <h2>Explore by Country</h2>
-    <p class="section-description">Click on a highlighted country to discover its unique fragrances</p>
+    <p class="section-description">Click on a highlighted country to discover
+      its unique fragrances</p>
     <div class="map-wrapper">
-      <app-country-map (countrySelected)="onCountrySelected($event)"></app-country-map>
+      <app-country-map
+        (countrySelected)="onCountrySelected($event)"></app-country-map>
     </div>
   </section>
 
@@ -23,7 +25,8 @@
       <div class="category-content">
         <h3>For Him</h3>
         <p>Discover masculine scents that command attention</p>
-        <button class="category-btn">Shop Men's Fragrances</button>
+        <button class="category-btn" (click)="exploreCollectionFor('men')">Shop
+          Men's Fragrances</button>
       </div>
     </div>
 
@@ -31,7 +34,9 @@
       <div class="category-content">
         <h3>For Her</h3>
         <p>Explore feminine fragrances that captivate</p>
-        <button class="category-btn">Shop Women's Fragrances</button>
+        <button class="category-btn"
+          (click)="exploreCollectionFor('woman')">Shop
+          Women's Fragrances</button>
       </div>
     </div>
   </section>
