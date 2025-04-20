@@ -10,72 +10,128 @@ export class PerfumeService {
   private perfumes: Perfume[] = [
     {
       id: 1,
-      name: 'Nile Essence',
+      name: 'egypt',
       country: 'Egypt',
-      description: 'Captures the mystique of ancient Egypt with exotic spices and floral notes from the Nile valley.',
-      price: 89.99,
-      imageUrl: 'assets/images/egypt-perfume.jpg',
-      features: ['Long-lasting', 'Exotic', 'Unisex', 'Evening wear'],
+      description: 'A floral-fruity scent that blends jasmine and strawberry for a fresh, captivating fragrance inspired by the beauty of the Nile.',
+      price: 500.00,
+      images: [
+        '../../../assets/images/egypt-perfume..jpg',
+        '../../../assets/images/egypt.jpg',
+      ],
+      features: ['woman', 'daily use', 'inspired by Burberry her'],
+      category: 'woman',
+      isNew: false,
+      isBestSeller: true,
+      details: 'Named after Egypt for its core notes of jasmine and strawberry — Egypt is the world’s No.1 producer of jasmine and ranks third globally in strawberry production. Its fresh aroma perfectly mirrors the Egyptian breeze.',
       notes: {
-        top: ['Bergamot', 'Green Notes', 'Lemon'],
-        middle: ['Lotus', 'Jasmine', 'Lily'],
-        base: ['Amber', 'Musk', 'Sandalwood', 'Vanilla']
+        top: ['Strawberry', 'Berries', 'Mandarin', 'Lemon'],
+        middle: ['Jasmine', 'Floral Notes'],
+        base: ['Vanilla', 'Musk', 'Amber', 'Patchouli', 'Woods']
       }
     },
     {
       id: 2,
-      name: 'Mediterranean Breeze',
+      name: 'spain',
       country: 'Spain',
-      description: 'Evokes the sunny coasts of Spain with vibrant citrus and aromatic herbal notes.',
-      price: 79.99,
-      imageUrl: 'assets/images/spain-perfume.jpg',
-      features: ['Fresh', 'Summer', 'Energetic', 'Day wear'],
+      description: 'Warm and indulgent — a sweet blend of vanilla, caramel, and golden honey that wraps you in Mediterranean comfort.',
+      price: 500.00,
+      images: [
+        '../../../assets/images/b-spain.jpg',
+        '../../../assets/images/spain.jpg',
+      ],
+      features: ['Warm', 'Occupation', 'inspired by Bianco latte'],
+      category: 'unisex',
+      isNew: false,
+      isBestSeller: true,
+      details: 'Named after Spain due to its warm ingredients that reflect the country’s sunny, Mediterranean climate all year round.',
       notes: {
-        top: ['Lemon', 'Mandarin', 'Bergamot'],
-        middle: ['Orange Blossom', 'Lavender', 'Rosemary'],
-        base: ['Cedar', 'Vanilla', 'Tonka Bean']
+        top: ['Caramel'],
+        middle: ['Honey', 'Coconut'],
+        base: ['Vanilla', 'White Musk']
       }
     },
     {
       id: 3,
-      name: 'Sakura Dream',
-      country: 'Japan',
-      description: 'Delicate floral fragrance inspired by Japanese cherry blossoms and tea ceremonies.',
-      price: 95.99,
-      imageUrl: 'assets/images/japan-perfume.jpg',
-      features: ['Elegant', 'Floral', 'Romantic', 'Special occasions'],
+      name: 'guatemala',
+      country: 'Guatemala',
+      description: 'Mysterious and bold — a sensual mix of basil and woods that leaves a sexy, unforgettable trail.',
+      price: 500.00,
+      images: [
+        '../../../assets/images/b-guatemala.jpg',
+        '../../../assets/images/guatemala.jpg',
+      ],
+      features: ['Fresh', 'Summer', 'Energetic', 'inspired by La Nuit de l', 'Homme'],
+      category: 'men',
+      isNew: false,
+      isBestSeller: true,
+      details: 'Named after Guatemala as it’s the world’s top producer of cardamom — the perfume’s bold, spicy opening note.',
       notes: {
-        top: ['Cherry Blossom', 'Pear', 'Green Tea'],
-        middle: ['Rose', 'Peony', 'Orchid'],
-        base: ['Musk', 'Woody Notes', 'Amber']
+        top: ['Cardamom'],
+        middle: ['Lavender', 'Cedarwood', 'Bergamot'],
+        base: ['Vetiver', 'Caraway']
       }
     },
     {
       id: 4,
-      name: 'Parisian Chic',
-      country: 'France',
-      description: 'Sophisticated blend that embodies the elegance of Paris with classic floral notes.',
-      price: 109.99,
-      imageUrl: 'assets/images/france-perfume.jpg',
-      features: ['Luxurious', 'Timeless', 'Feminine', 'Evening wear'],
+      name: 'greece',
+      country: 'Greece',
+      description: 'A splash of citrus breeze with mandarin and orange — crisp, clean, and full of Aegean freshness.',
+      price: 500.00,
+      images: [
+        '../../../assets/images/b-greece.jpg',
+        '../../../assets/images/greece.jpg',
+      ],
+      features: ['Fresh', 'Summer', 'Energetic', 'Day wear', 'inspiredby allure homme sport'],
+      category: 'men',
+      isNew: false,
+      isBestSeller: false,
+      details: 'Named after Greece thanks to its refreshing marine and citrus notes that transport you to a sunny Greek beach.',
       notes: {
-        top: ['Peach', 'Black Currant', 'Bergamot'],
-        middle: ['Rose', 'Jasmine', 'Lily of the Valley'],
-        base: ['Patchouli', 'Vanilla', 'Sandalwood']
+        top: ['Marine Notes', 'Mandarin', 'Orange', 'Bergamot'],
+        middle: ['Pepper', 'Woody Notes'],
+        base: ['Musk', 'Amber', 'Vanilla', 'Tonka Bean']
       }
     },
     {
       id: 5,
-      name: 'Tropical Nights',
-      country: 'Brazil',
-      description: 'Exotic and sensual fragrance with tropical fruits and rich vanilla.',
-      price: 84.99,
-      imageUrl: 'assets/images/brazil-perfume.jpg',
-      features: ['Sensual', 'Warm', 'Exotic', 'Night wear'],
+      name: 'oman',
+      country: 'Oman',
+      description: 'An oriental delight with rich notes of cinnamon, dates, almond, and vanilla — capturing the heart of Arabian nights.',
+      price: 500.00,
+      images: [
+        '../../../assets/images/b-oman.jpg',
+        '../../../assets/images/oman.jpg',
+      ],
+      features: ['Fresh', 'Summer', 'Energetic', 'inspired by khamra'],
+      category: 'unisex',
+      isNew: false,
+      isBestSeller: false,
+      details: 'Named after Oman for its rich Middle Eastern essence — featuring dates, almond, and spices that reflect the soul of Arabian heritage.',
       notes: {
-        top: ['Passion Fruit', 'Mango', 'Lime'],
-        middle: ['Tuberose', 'Jasmine', 'Orchid'],
-        base: ['Vanilla', 'Amber', 'Sandalwood']
+        top: ['Cinnamon', 'Nutmeg', 'Bergamot'],
+        middle: ['Dates', 'Almond Candy', 'Musk'],
+        base: ['Vanilla', 'Tonka Bean', 'Woods']
+      }
+    },
+    {
+      id: 6,
+      name: 'england',
+      country: 'England',
+      description: 'A unique blend of green apple, cardamom, and vanilla — mysterious, elegant, and undeniably British.',
+      price: 500.00,
+      images: [
+        '../../../assets/images/b-england.jpg',
+        '../../../assets/images/england.jpg',
+      ],
+      features: ['inspired by Layton', 'Energetic', 'Day wear'],
+      category: 'unisex',
+      isNew: true,
+      isBestSeller: false,
+      details: 'Named after England for its mysterious and elegant character — inspired by London’s foggy charm and influenced by Parfums de Marly’s Layton, also the name of an English football club.',
+      notes: {
+        top: ['Green Apple', 'Bergamot', 'Lavender', 'Mandarin'],
+        middle: ['Jasmine', 'Cardamom', 'Woody Notes'],
+        base: ['Vanilla', 'Patchouli', 'Pepper', 'Sandalwood']
       }
     }
   ];

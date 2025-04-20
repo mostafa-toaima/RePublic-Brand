@@ -1,0 +1,61 @@
+<div class="perfume-card" *ngIf="perfume">
+  <div class="perfume-image" (click)="openDetails(perfume)">
+    <div class="image-overlay"></div>
+    <span>open</span>
+    <img [src]="perfume.images[0]" [alt]="perfume.name" loading="lazy">
+    <div class="perfume-badge" *ngIf="perfume.isNew">New</div>
+  </div>
+  <div class="perfume-details">
+    <div class="header-section">
+      <div class="perfume-type">
+        <h3>{{ perfume.name | uppercase }}</h3>
+        <div class="category">
+          <div class="category-badge">{{perfume.category}}</div>
+        </div>
+      </div>
+    </div>
+    <p class="description">{{ perfume.description }}</p>
+    <div class="features">
+      <span class="feature-tag" *ngFor="let feature of perfume.features">
+        <i class="feature-icon" [class]="getFeatureIcon(feature)"></i>
+        {{ feature }}
+      </span>
+    </div>
+    <div class="notes-accordion">
+      <div class="note-section" (click)="toggleNotes()">
+        <h4>Fragrance Notes <i class="toggle-icon">{{ showNotes ? '▲' : '▼'
+            }}</i></h4>
+        <div class="note-content" [class.expanded]="showNotes">
+          <div class="note-group">
+            <span class="note-label">Top:</span>
+            <span class="note-values">{{ perfume.notes.top.join(', ')
+              }}</span>
+          </div>
+          <div class="note-group">
+            <span class="note-label">Middle:</span>
+            <span class="note-values">{{ perfume.notes.middle.join(', ')
+              }}</span>
+          </div>
+          <div class="note-group">
+            <span class="note-label">Base:</span>
+            <span class="note-values">{{ perfume.notes.base.join(', ')
+              }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="price-section">
+      <span class="price">${{ perfume.price.toFixed(2) }}</span>
+      <button class="add-to-cart">
+        <i class="cart-icon"></i> Add to Cart
+      </button>
+    </div>
+  </div>
+</div>
+
+<app-perfume-details
+  [perfume]="perfume"
+  [isOpen]="showDetails"
+  (closed)="showDetails = false"
+  (addedToCart)="addToCart($event)">
+</app-perfume-details>

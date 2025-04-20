@@ -1,0 +1,159 @@
+<div class="products-page">
+  <section class="products-hero" aria-label="Fragrance Collection Introduction">
+    <div class="img-overlay"></div>
+    <div class="hero-overlay">
+      <div class="hero-content container">
+        <h1 class="hero-title">Our Fragrance Collection</h1>
+        <p class="hero-subtitle">Discover exquisite scents from around the
+          world</p>
+      </div>
+    </div>
+  </section>
+  <div class="filter-controls" *ngIf="!isLoading">
+    <div class="filter-header" (click)="toggleShowFilter()">
+      <h2 class="filter-title">
+        <svg class="toggle-icon" [class.open]="showFilter" viewBox="0 0 24 24"
+          aria-hidden="true">
+          <path class="vertical" d="M12 5v14"></path>
+          <path class="horizontal" d="M5 12h14"></path>
+        </svg>
+        <span>Filter & Sort</span>
+      </h2>
+      <button class="reset-filters-button"
+        (click)="resetFilters($event)"
+        aria-label="Reset all filters">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path
+            d="M19 7l-.867 12.142A2 2 0 0 1 16.138 21H7.862a2 2 0 0 1-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v3m4.5-3.5l-5 5m5-5l-5-5"></path>
+        </svg>
+        Reset All
+      </button>
+    </div>
+
+    <div class="filter-grid" [class.open]="showFilter">
+      <div class="filter-group">
+        <div class="filter-label">
+          <div class="filter-icon-container">
+            <svg class="filter-icon" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M4 6h16M4 12h16M4 18h16" stroke-width="2"
+                stroke-linecap="round"></path>
+            </svg>
+          </div>
+          <label for="category-filter">Fragrance Family</label>
+        </div>
+        <div class="select-wrapper">
+          <select id="category-filter" [(ngModel)]="selectedCategory"
+            (change)="applyFilters()" class="styled-select">
+            <option *ngFor="let category of categories"
+              [value]="category">{{category}}</option>
+          </select>
+          <div class="select-arrow"></div>
+        </div>
+      </div>
+
+      <div class="filter-group">
+        <div class="filter-label">
+          <div class="filter-icon-container">
+            <svg class="filter-icon" viewBox="0 0 24 24" aria-hidden="true">
+              <path
+                d="M12 2a8 8 0 0 0-8 8c0 7 8 12 8 12s8-5 8-12a8 8 0 0 0-8-8z"
+                stroke-width="2"></path>
+              <circle cx="12" cy="10" r="3" stroke-width="2"></circle>
+            </svg>
+          </div>
+          <label for="country-filter">Origin Country</label>
+        </div>
+        <div class="select-wrapper">
+          <select id="country-filter" [(ngModel)]="selectedCountry"
+            (change)="applyFilters()" class="styled-select">
+            <option *ngFor="let country of countries"
+              [value]="country">{{country}}</option>
+          </select>
+          <div class="select-arrow"></div>
+        </div>
+      </div>
+
+      <div class="filter-group">
+        <div class="filter-label">
+          <div class="filter-icon-container">
+            <svg class="filter-icon" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M3 6h18M7 12h10M5 18h14" stroke-width="2"
+                stroke-linecap="round"></path>
+            </svg>
+          </div>
+          <label for="sort-filter">Sort Options</label>
+        </div>
+        <div class="select-wrapper">
+          <select id="sort-filter" [(ngModel)]="sortOption"
+            (change)="applyFilters()" class="styled-select">
+            <option value="featured">Featured</option>
+            <option value="price-low">Price: Low to High</option>
+            <option value="price-high">Price: High to Low</option>
+            <option value="name-asc">Name: A-Z</option>
+            <option value="name-desc">Name: Z-A</option>
+          </select>
+          <div class="select-arrow"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <main class="products-main-content">
+    <div class="container-fluid">
+      <section aria-labelledby="products-grid-heading">
+        <h2 id="products-grid-heading" class="sr-only">Fragrance Products</h2>
+        <div class="loading-state" *ngIf="isLoading" aria-live="polite"
+          aria-busy="true">
+          <div class="spinner" aria-hidden="true"></div>
+          <p>Loading fragrances...</p>
+        </div>
+        <div class="products-grid"
+          *ngIf="!isLoading && displayedProducts.length > 0">
+          <div
+            *ngFor="let product of displayedProducts"
+            attr.aria-labelledby="product-{{product.id}}-title">
+            <perfume-card [perfume]="product"></perfume-card>
+          </div>
+        </div>
+        <div class="empty-state"
+          *ngIf="!isLoading && filteredProducts.length === 0"
+          aria-live="polite">
+          <div class="empty-state-icon" aria-hidden="true">😕</div>
+          <h3 class="empty-state-title">No fragrances match your filters</h3>
+          <p class="empty-state-message">Try adjusting your search criteria</p>
+          <button class="reset-filters-button"
+            (click)="resetFilters($event)"
+            aria-label="Reset all filters">
+            Reset All Filters
+          </button>
+        </div>
+      </section>
+
+      <!-- Pagination -->
+      <nav class="pagination" *ngIf="!isLoading && filteredProducts.length > 0"
+        aria-label="Products pagination">
+        <button class="pagination-button pagination-prev"
+          [disabled]="currentPage === 1"
+          (click)="previousPage()"
+          aria-label="Go to previous page">
+          <span class="pagination-icon pagination-icon-prev"
+            aria-hidden="true">←</span>
+          Previous
+        </button>
+
+        <span class="pagination-status" aria-live="polite">
+          Page {{currentPage}} of {{totalPages}}
+        </span>
+
+        <button class="pagination-button pagination-next"
+          [disabled]="currentPage === totalPages"
+          (click)="nextPage()"
+          aria-label="Go to next page">
+          Next
+          <span class="pagination-icon pagination-icon-next"
+            aria-hidden="true">→</span>
+        </button>
+      </nav>
+    </div>
+  </main>
+</div>
