@@ -107,14 +107,18 @@
           <div class="spinner" aria-hidden="true"></div>
           <p>Loading fragrances...</p>
         </div>
-        <div class="products-grid"
-          *ngIf="!isLoading && displayedProducts.length > 0">
-          <div
-            *ngFor="let product of displayedProducts"
-            attr.aria-labelledby="product-{{product.id}}-title">
-            <perfume-card [perfume]="product"></perfume-card>
-          </div>
+
+        @if (!isLoading && displayedProducts.length > 0) {
+        <div
+          class="d-flex justify-content-center align-items-center flex-wrap">
+          <perfume-card
+            *ngFor="let product of displayedProducts; trackBy: trackById"
+            class="col-md-6 col-lg-4 col-xl-3"
+            [perfume]="product">
+          </perfume-card>
         </div>
+        }
+
         <div class="empty-state"
           *ngIf="!isLoading && filteredProducts.length === 0"
           aria-live="polite">

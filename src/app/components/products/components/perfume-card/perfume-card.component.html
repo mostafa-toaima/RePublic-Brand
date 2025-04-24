@@ -59,23 +59,20 @@
     </div>
 
     <div class="price-section">
-      <span class="price">{{ perfume.price.toFixed(2) }}</span>
+      <span class="price">{{ +perfume.price | number: '1.2-2' }}</span>
       <div *ngIf="!addedToCart; else addedState">
         <select class="size-select" [(ngModel)]="selectedSize">
           <option
             [value]="availableSizes[1]"
             disabled>{{availableSizes[1]}}ml</option>
         </select>
-        <button class="add-to-cart" (click)="addToCart(perfume)">
+        <button type="button" class="add-to-cart" (click)="addToCart(perfume)">
           <i class="cart-icon"></i> Add to Cart
         </button>
       </div>
       <ng-template #addedState>
-        <button class="go-to-cart" (click)="navigateToCart()">
-          <i class="cart-icon"></i> Added! Go to Cart
-        </button>
-        <button (click)="removeFromCart(perfume)"
-          class="btn removeButton">Remove From the Cart</button>
+        <button type="button" (click)="removeFromCart(perfume)"
+          class="add-to-cart">Remove From the Cart</button>
       </ng-template>
     </div>
   </div>

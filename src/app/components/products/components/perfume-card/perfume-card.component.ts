@@ -32,11 +32,16 @@ export class PerfumeCardComponent implements OnInit {
 
 
 
-  removeFromCart(perfume: Perfume): void {
-    this.productSerivce.updateCart(perfume, false, 'inCart');
-  }
   addToCart(perfume: Perfume): void {
+    perfume.inCart = true;
+    this.addedToCart = true;
     this.productSerivce.updateCart(perfume, true, 'inCart');
+  }
+
+  removeFromCart(perfume: Perfume): void {
+    perfume.inCart = false;
+    this.addedToCart = false;
+    this.productSerivce.updateCart(perfume, false, 'inCart');
   }
 
 

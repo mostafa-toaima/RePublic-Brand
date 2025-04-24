@@ -138,4 +138,9 @@ export class ProductsComponent implements OnInit {
       behavior: 'smooth'
     });
   }
+
+  trackById(index: number, perfume: Perfume): string {
+    return perfume.id || '';
+  }
+
 }
