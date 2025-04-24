@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { CartService } from '../../../../common/services/cart.service';
 import { PerfumeService } from '../../../../common/services/perfume.service';
 import { ProductsService } from '../../services/products.service';
+import { WishlistService } from '../../../../common/services/wishlist.service';
 
 @Component({
   selector: 'perfume-card',
@@ -15,6 +16,7 @@ export class PerfumeCardComponent implements OnInit {
   showDetails: boolean = false;
   showNotes: boolean = false;
   addedToCart: boolean = false;
+  isInWishlist: boolean = false;
   selectedSize: string = '50';
   availableSizes: string[] = ['30', '50', '100'];
 
@@ -22,38 +24,39 @@ export class PerfumeCardComponent implements OnInit {
   cartService = inject(CartService);
   perfumeService = inject(PerfumeService);
   productSerivce = inject(ProductsService);
+  wishListService = inject(WishlistService);
 
   ngOnInit(): void {
-    this.addedToCart = this.perfume?.inCart || false;
+    if (this.perfume?.id) {
+      this.addedToCart = this.cartService.isInCart(this.perfume.id);
+      this.isInWishlist = this.wishListService.isInWishList(this.perfume.id);
+    }
   }
   toggleNotes() {
     this.showNotes = !this.showNotes;
   }
 
-
-
   addToCart(perfume: Perfume): void {
-    perfume.inCart = true;
+    this.cartService.addToCart(perfume, this.selectedSize);
     this.addedToCart = true;
-    this.productSerivce.updateCart(perfume, true, 'inCart');
   }
 
   removeFromCart(perfume: Perfume): void {
-    perfume.inCart = false;
+    if (perfume.id) {
+      this.cartService.removeFromCart(perfume.id);
+    }
     this.addedToCart = false;
-    this.productSerivce.updateCart(perfume, false, 'inCart');
   }
-
 
   toggleWishlist(perfume: Perfume) {
     if (!perfume.id) {
       return;
     }
-    perfume.inWishlist = !perfume.inWishlist;
-    if (perfume.inWishlist) {
-      this.productSerivce.addToWishlist(perfume);
+    this.isInWishlist = !this.isInWishlist;
+    if (this.isInWishlist) {
+      this.wishListService.addToWishList(perfume);
     } else {
-      this.productSerivce.removeFromWishlist(perfume);
+      this.wishListService.removeFromWishList(perfume.id);
     }
   }
 

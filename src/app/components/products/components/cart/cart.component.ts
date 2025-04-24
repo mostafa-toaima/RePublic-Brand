@@ -12,7 +12,7 @@ import { Perfume } from '../../../../common/models/perfume.model';
 import { PerfumeService } from '../../../../common/services/perfume.service';
 import { ProductsService } from '../../services/products.service';
 import { environment } from '../../../../../environment';
-import { CartItem } from '../../../../common/services/cart.service';
+import { Cart } from '../../../../common/models/Cart';
 
 @Component({
   selector: 'app-cart',
@@ -20,7 +20,7 @@ import { CartItem } from '../../../../common/services/cart.service';
   styleUrls: ['./cart.component.scss']
 })
 export class CartComponent implements OnInit, OnDestroy {
-  cartItems: CartItem[] = [];
+  cartItems: Cart[] = [];
   checkoutForm: FormGroup;
   paymentMethod: string = 'cash';
   orderSubmitted = false;
@@ -100,7 +100,7 @@ export class CartComponent implements OnInit, OnDestroy {
       });
   }
 
-  trackByPerfumeId(index: number, item: CartItem): string {
+  trackByPerfumeId(index: number, item: Cart): string {
     return item.perfume.id || '';
   }
 
@@ -119,7 +119,7 @@ export class CartComponent implements OnInit, OnDestroy {
     return this.totalPrice + this.taxAmount;
   }
 
-  updateQuantity(item: CartItem, quantity: number): void {
+  updateQuantity(item: Cart, quantity: number): void {
     if (quantity < 1 || quantity > 99) return;
 
     const updatedItem = { ...item, quantity };

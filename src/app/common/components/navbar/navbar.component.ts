@@ -1,7 +1,9 @@
+import { WishlistService } from './../../services/wishlist.service';
 import { Component, inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { PerfumeService } from '../../services/perfume.service';
 import { Perfume } from '../../models/perfume.model';
+import { CartService } from '../../services/cart.service';
 
 @Component({
   selector: 'custom-navbar',
@@ -10,11 +12,25 @@ import { Perfume } from '../../models/perfume.model';
 })
 export class NavbarComponent implements OnInit {
   cartItemCount: number = 0;
+  wishlistItemCount: number = 0;
   router = inject(Router);
-  perfumeService = inject(PerfumeService);
+  cartService = inject(CartService);
+  wishlistService = inject(WishlistService);
 
   ngOnInit() {
     this.getCartItemCount();
+    this.getWishlistItemCount();
+  }
+
+  getCartItemCount() {
+    this.cartService.cartCount$.subscribe(count => {
+      this.cartItemCount = count;
+    });
+  }
+  getWishlistItemCount() {
+    this.wishlistService.wishlistCount$.subscribe(count => {
+      this.wishlistItemCount = count;
+    });
   }
 
   collapseNavbar() {
@@ -28,14 +44,11 @@ export class NavbarComponent implements OnInit {
     this.router.navigate(['/cart']);
   }
 
-  getCartItemCount() {
-    this.perfumeService.getAllPerfumes().subscribe(item => {
-      this.cartItemCount = item.filter((perfume: Perfume) => perfume.inCart).length;
-    });
-  }
-
   exploreCollectionFor(type: string) {
     this.router.navigate(['/products'], { queryParams: { type } });
   }
 
+  openWishList() {
+
+  }
 }

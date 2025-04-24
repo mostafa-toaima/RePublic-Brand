@@ -1,3 +1,4 @@
+import { WishlistService } from './../../../../common/services/wishlist.service';
 import { Perfume } from '../../../../common/models/perfume.model';
 import { ProductsService } from './../../services/products.service';
 import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
@@ -11,11 +12,13 @@ export class PerfumeDetailsComponent {
   @Input() perfume: any;
   @Input() isOpen: boolean = false;
   @Output() closed = new EventEmitter<void>();
-  @Output() addedToCart = new EventEmitter<any>();
-
+  @Output() addToCart = new EventEmitter<any>();
+  @Output() removeFromoCart = new EventEmitter<any>();
+  addedToCart: boolean = false
   selectedImage: string = '';
   selectedSize: string = '';
   productSerivce = inject(ProductsService);
+  wishlistService = inject(WishlistService);
   ngOnInit() {
     if (this.perfume && this.perfume.images && this.perfume.images.length > 0) {
       this.selectedImage = this.perfume.images[0];
@@ -45,15 +48,12 @@ export class PerfumeDetailsComponent {
     this.selectedImage = this.perfume.images[nextIndex];
   }
 
-  selectSize(size: string) {
-    this.selectedSize = size;
+  togleCart() {
+    this.addedToCart = !this.addedToCart;
+    if (this.addedToCart) {
+      this.addToCart.emit(this.perfume);
+    } else {
+      this.removeFromoCart.emit(this.perfume);
+    }
   }
-
-  addToCart() {
-    this.addedToCart.emit({
-      ...this.perfume,
-      selectedSize: this.selectedSize
-    });
-  }
-
 }
