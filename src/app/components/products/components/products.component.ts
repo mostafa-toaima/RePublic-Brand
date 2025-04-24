@@ -21,8 +21,8 @@ export class ProductsComponent implements OnInit {
   productsPerPage: number = 4;
   totalPages: number = 1;
 
-  selectedCategory: string = 'all';
-  selectedCountry: string = 'all';
+  selectedCategory: string = 'ALL';
+  selectedCountry: string = 'ALL';
   sortOption: string = 'featured';
   showFilter: boolean = false;
 
@@ -32,7 +32,7 @@ export class ProductsComponent implements OnInit {
   ngOnInit(): void {
     this.route.queryParamMap.subscribe(params => {
       if (params.has('type')) {
-        this.selectedCategory = params.get('type') || 'all';
+        this.selectedCategory = params.get('type') || 'ALL';
       }
       this.loadProducts();
     });
@@ -43,15 +43,15 @@ export class ProductsComponent implements OnInit {
       this.perfumeService.getAllPerfumes().subscribe((products: Perfume[]) => {
         this.allProducts = products;
         this.filteredProducts = [...this.allProducts];
-        this.categories = ['All', ...new Set(this.allProducts.map(p => p.category))];
-        this.countries = ['All', ...new Set(this.allProducts.map(p => p.country))];
+        this.categories = ['ALL', ...new Set(this.allProducts.map(p => p.category))];
+        this.countries = ['ALL', ...new Set(this.allProducts.map(p => p.country))];
         this.applyFilters();
         this.isLoading = false;
       });
 
       this.filteredProducts = [...this.allProducts];
-      this.categories = ['all', ...new Set(this.allProducts.map(p => p.category))];
-      this.countries = ['all', ...new Set(this.allProducts.map(p => p.country))];
+      this.categories = ['ALL', ...new Set(this.allProducts.map(p => p.category))];
+      this.countries = ['ALL', ...new Set(this.allProducts.map(p => p.country))];
 
       this.applyFilters();
       this.isLoading = false;
@@ -60,10 +60,10 @@ export class ProductsComponent implements OnInit {
 
   applyFilters(): void {
     let filtered = this.allProducts;
-    if (this.selectedCategory !== 'all') {
+    if (this.selectedCategory !== 'ALL') {
       filtered = filtered.filter(p => p.category === this.selectedCategory);
     }
-    if (this.selectedCountry !== 'all') {
+    if (this.selectedCountry !== 'ALL') {
       filtered = filtered.filter(p => p.country === this.selectedCountry);
     }
     switch (this.sortOption) {
@@ -126,8 +126,8 @@ export class ProductsComponent implements OnInit {
 
   resetFilters(event: any): void {
     event.stopPropagation();
-    this.selectedCategory = 'all';
-    this.selectedCountry = 'all';
+    this.selectedCategory = 'ALL';
+    this.selectedCountry = 'ALL';
     this.sortOption = 'featured';
     this.applyFilters();
   }

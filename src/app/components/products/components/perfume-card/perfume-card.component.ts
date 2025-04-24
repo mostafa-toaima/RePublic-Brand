@@ -37,7 +37,7 @@ export class PerfumeCardComponent implements OnInit {
   }
 
   addToCart(perfume: Perfume): void {
-    this.cartService.addToCart(perfume, this.selectedSize);
+    this.cartService.addToCart(perfume);
     this.addedToCart = true;
   }
 

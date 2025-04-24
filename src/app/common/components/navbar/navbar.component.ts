@@ -1,36 +1,47 @@
-import { WishlistService } from './../../services/wishlist.service';
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
-import { PerfumeService } from '../../services/perfume.service';
-import { Perfume } from '../../models/perfume.model';
 import { CartService } from '../../services/cart.service';
+import { WishlistService } from '../../services/wishlist.service';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'custom-navbar',
   templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.scss'] // fix: should be style**Urls**
+  styleUrls: ['./navbar.component.scss']
 })
-export class NavbarComponent implements OnInit {
+export class NavbarComponent implements OnInit, OnDestroy {
   cartItemCount: number = 0;
   wishlistItemCount: number = 0;
   router = inject(Router);
   cartService = inject(CartService);
   wishlistService = inject(WishlistService);
 
+  private destroy$ = new Subject<void>();
+
   ngOnInit() {
     this.getCartItemCount();
     this.getWishlistItemCount();
   }
 
-  getCartItemCount() {
-    this.cartService.cartCount$.subscribe(count => {
-      this.cartItemCount = count;
-    });
+  ngOnDestroy() {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
+
+  getCartItemCount() {
+    this.cartService.cart$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(items => {
+        this.cartItemCount = this.cartService.getCartItemCount();
+      });
+  }
+
   getWishlistItemCount() {
-    this.wishlistService.wishlistCount$.subscribe(count => {
-      this.wishlistItemCount = count;
-    });
+    this.wishlistService.wishlistCount$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(count => {
+        this.wishlistItemCount = count;
+      });
   }
 
   collapseNavbar() {
@@ -49,6 +60,6 @@ export class NavbarComponent implements OnInit {
   }
 
   openWishList() {
-
+    this.router.navigate(['/wishlist']);
   }
 }
