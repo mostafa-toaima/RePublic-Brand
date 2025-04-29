@@ -1,6 +1,4 @@
 import { WishlistService } from './../../../../common/services/wishlist.service';
-import { Perfume } from '../../../../common/models/perfume.model';
-import { ProductsService } from './../../services/products.service';
 import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
 
 @Component({
@@ -17,7 +15,6 @@ export class PerfumeDetailsComponent {
   addedToCart: boolean = false
   selectedImage: string = '';
   selectedSize: string = '';
-  productSerivce = inject(ProductsService);
   wishlistService = inject(WishlistService);
   ngOnInit() {
     if (this.perfume && this.perfume.images && this.perfume.images.length > 0) {

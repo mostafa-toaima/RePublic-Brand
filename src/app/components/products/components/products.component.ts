@@ -1,103 +1,125 @@
-import { Component, inject, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Component, inject, OnInit, OnDestroy } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Subject, takeUntil } from 'rxjs';
 import { Perfume } from '../../../common/models/perfume.model';
-import { PerfumeService } from '../../../common/services/perfume.service';
-
+import { PerfumesService } from '../services/perfumes.service';
 
 @Component({
   selector: 'app-products',
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.scss']
 })
-export class ProductsComponent implements OnInit {
+export class ProductsComponent implements OnInit, OnDestroy {
   allProducts: Perfume[] = [];
   displayedProducts: Perfume[] = [];
   filteredProducts: Perfume[] = [];
+
   isLoading: boolean = true;
+  showFilter: boolean = false;
+
   categories: string[] = [];
   countries: string[] = [];
-
-  currentPage: number = 1;
-  productsPerPage: number = 4;
-  totalPages: number = 1;
 
   selectedCategory: string = 'ALL';
   selectedCountry: string = 'ALL';
   sortOption: string = 'featured';
-  showFilter: boolean = false;
 
-  perfumeService = inject(PerfumeService)
+  currentPage: number = 1;
+  productsPerPage: number = 4;
+  totalPages: number = 1;
+  pageNumbers: number[] = [];
+
+  private destroy$ = new Subject<void>();
+  private perfumeService = inject(PerfumesService);
+
   constructor(private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.route.queryParamMap.subscribe(params => {
-      if (params.has('type')) {
-        this.selectedCategory = params.get('type') || 'ALL';
-      }
-      this.loadProducts();
-    });
+    this.initializeComponent();
   }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
+
+  private initializeComponent(): void {
+    this.setupRouteListener();
+    this.loadProducts();
+  }
+
+  private setupRouteListener(): void {
+    this.route.queryParamMap
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(params => {
+        this.selectedCategory = params.get('type') || 'ALL';
+        if (this.allProducts.length) {
+          this.applyFilters();
+        }
+      });
+  }
+
   loadProducts(): void {
     this.isLoading = true;
     setTimeout(() => {
-      this.perfumeService.getAllPerfumes().subscribe((products: Perfume[]) => {
-        this.allProducts = products;
-        this.filteredProducts = [...this.allProducts];
-        this.categories = ['ALL', ...new Set(this.allProducts.map(p => p.category))];
-        this.countries = ['ALL', ...new Set(this.allProducts.map(p => p.country))];
-        this.applyFilters();
-        this.isLoading = false;
-      });
-
-      this.filteredProducts = [...this.allProducts];
-      this.categories = ['ALL', ...new Set(this.allProducts.map(p => p.category))];
-      this.countries = ['ALL', ...new Set(this.allProducts.map(p => p.country))];
-
-      this.applyFilters();
-      this.isLoading = false;
+      this.perfumeService.getAllPerfumes()
+        .pipe(takeUntil(this.destroy$))
+        .subscribe({
+          next: (products: Perfume[]) => {
+            this.handleProductsLoad(products);
+          },
+          error: () => {
+            this.isLoading = false;
+          }
+        });
     }, 1000);
   }
 
+  private handleProductsLoad(products: Perfume[]): void {
+    this.allProducts = products;
+
+    this.categories = this.perfumeService.getUniqueCategories(products);
+    this.countries = this.perfumeService.getUniqueCountries(products);
+
+    this.applyFilters();
+    this.isLoading = false;
+  }
+
   applyFilters(): void {
-    let filtered = this.allProducts;
-    if (this.selectedCategory !== 'ALL') {
-      filtered = filtered.filter(p => p.category === this.selectedCategory);
-    }
-    if (this.selectedCountry !== 'ALL') {
-      filtered = filtered.filter(p => p.country === this.selectedCountry);
-    }
-    switch (this.sortOption) {
-      case 'price-low':
-        filtered.sort((a, b) => a.price - b.price);
-        break;
-      case 'price-high':
-        filtered.sort((a, b) => b.price - a.price);
-        break;
-      case 'name-asc':
-        filtered.sort((a, b) => a.name.localeCompare(b.name));
-        break;
-      case 'name-desc':
-        filtered.sort((a, b) => b.name.localeCompare(a.name));
-        break;
-      default:
-        break;
-    }
+    const filtered = this.perfumeService.filterAndSortPerfumes(
+      this.allProducts,
+      this.selectedCategory,
+      this.selectedCountry,
+      this.sortOption
+    );
+
     this.filteredProducts = filtered;
-    this.currentPage = 1;
     this.updatePagination();
     this.updateDisplayedProducts();
   }
 
   updatePagination(): void {
     this.totalPages = Math.ceil(this.filteredProducts.length / this.productsPerPage);
+    this.pageNumbers = Array.from({ length: this.totalPages }, (_, i) => i + 1);
+
     if (this.currentPage > this.totalPages && this.totalPages > 0) {
       this.currentPage = this.totalPages;
     }
   }
 
   updateDisplayedProducts(): void {
-    const startIndex = (this.currentPage - 1) * this.productsPerPage;
-    this.displayedProducts = this.filteredProducts.slice(startIndex, startIndex + this.productsPerPage);
+    this.displayedProducts = this.perfumeService.paginateProducts(
+      this.filteredProducts,
+      this.currentPage,
+      this.productsPerPage
+    );
+  }
+
+  goToPage(page: number): void {
+    if (page >= 1 && page <= this.totalPages) {
+      this.currentPage = page;
+      this.updateDisplayedProducts();
+    }
   }
 
   nextPage(): void {
@@ -114,17 +136,15 @@ export class ProductsComponent implements OnInit {
     }
   }
 
-  addToCart(product: Perfume): void {
-    // In a real app, you would call your cart service here
-    console.log('Added to cart:', product);
-    // this.cartService.addToCart(product);
+  onSearchChange(): void {
+    this.applyFilters();
   }
 
-  toggleShowFilter() {
+  toggleShowFilter(): void {
     this.showFilter = !this.showFilter;
   }
 
-  resetFilters(event: any): void {
+  resetFilters(event: Event): void {
     event.stopPropagation();
     this.selectedCategory = 'ALL';
     this.selectedCountry = 'ALL';
@@ -132,7 +152,7 @@ export class ProductsComponent implements OnInit {
     this.applyFilters();
   }
 
-  scrollToContent() {
+  scrollToContent(): void {
     window.scrollTo({
       top: 0,
       behavior: 'smooth'
@@ -140,7 +160,6 @@ export class ProductsComponent implements OnInit {
   }
 
   trackById(index: number, perfume: Perfume): string {
-    return perfume.id || '';
+    return perfume.id || index.toString();
   }
-
 }

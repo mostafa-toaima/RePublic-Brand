@@ -2,8 +2,8 @@
 import { Component, ElementRef, EventEmitter, Input, OnChanges, OnInit, Output, ViewChild, HostListener } from '@angular/core';
 import * as d3 from 'd3';
 import * as topojson from 'topojson-client';
-import { PerfumeService } from '../../common/services/perfume.service';
 import { FeatureCollection } from 'geojson';
+import { PerfumesService } from '../products/services/perfumes.service';
 
 @Component({
   selector: 'app-country-map',
@@ -27,7 +27,7 @@ export class CountryMapComponent implements OnInit, OnChanges {
   private projection: any;
   private path: any;
 
-  constructor(private perfumeService: PerfumeService) { }
+  constructor(private perfumeService: PerfumesService) { }
 
   ngOnInit(): void {
     this.checkScreenSize();

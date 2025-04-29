@@ -1,163 +1,117 @@
 <div class="products-page">
-  <section class="products-hero" aria-label="Fragrance Collection Introduction">
-    <div class="img-overlay"></div>
-    <div class="hero-overlay">
-      <div class="hero-content container">
-        <h1 class="hero-title">Our Fragrance Collection</h1>
-        <p class="hero-subtitle">Discover exquisite scents from around the
-          world</p>
-      </div>
+  <section class="products-hero position-relative d-flex align-items-center mb-5 bg-dark">
+    <div class="position-absolute top-0 start-0 w-100 h-100 bg-gradient-bottom-dark"></div>
+    <div class="container text-center text-white z-1">
+      <h1 class="display-4 mb-3 text-uppercase fw-light">Our Fragrance Collection</h1>
+      <p class="fs-4">Discover exquisite scents from around the world</p>
     </div>
   </section>
-  <div class="filter-controls" *ngIf="!isLoading">
-    <div class="filter-header" (click)="toggleShowFilter()">
-      <h2 class="filter-title">
-        <svg class="toggle-icon" [class.open]="showFilter" viewBox="0 0 24 24"
-          aria-hidden="true">
-          <path class="vertical" d="M12 5v14"></path>
-          <path class="horizontal" d="M5 12h14"></path>
-        </svg>
-        <span>Filter & Sort</span>
-      </h2>
-      <button class="reset-filters-button"
-        (click)="resetFilters($event)"
-        aria-label="Reset all filters">
-        <svg viewBox="0 0 24 24" aria-hidden="true">
-          <path
-            d="M19 7l-.867 12.142A2 2 0 0 1 16.138 21H7.862a2 2 0 0 1-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v3m4.5-3.5l-5 5m5-5l-5-5"></path>
-        </svg>
-        Reset All
-      </button>
-    </div>
 
-    <div class="filter-grid" [class.open]="showFilter">
-      <div class="filter-group">
-        <div class="filter-label">
-          <div class="filter-icon-container">
-            <svg class="filter-icon" viewBox="0 0 24 24" aria-hidden="true">
-              <path d="M4 6h16M4 12h16M4 18h16" stroke-width="2"
-                stroke-linecap="round"></path>
-            </svg>
-          </div>
-          <label for="category-filter">Fragrance Family</label>
-        </div>
-        <div class="select-wrapper">
-          <select id="category-filter" [(ngModel)]="selectedCategory"
-            (change)="applyFilters()" class="styled-select">
-            <option *ngFor="let category of categories"
-              [value]="category">{{category}}</option>
-          </select>
-          <div class="select-arrow"></div>
-        </div>
+  <div class="container mb-4">
+    <div class="card shadow-sm border-0 overflow-hidden">
+      <div class="card-header bg-white d-flex justify-content-between align-items-center filter-header"
+           (click)="toggleShowFilter()">
+        <h2 class="mb-0 d-flex align-items-center gap-2">
+          <svg class="toggle-icon" [class.rotated]="showFilter" width="24" height="24" viewBox="0 0 24 24">
+            <path class="vertical" d="M12 5v14" stroke="#7f8c8d" stroke-width="2"></path>
+            <path class="horizontal" d="M5 12h14" stroke="#7f8c8d" stroke-width="2"></path>
+          </svg>
+          <span>Filter & Sort</span>
+        </h2>
+        <button class="btn btn-sm btn-outline-danger d-flex align-items-center gap-1"
+                (click)="resetFilters($event)" stopPropagation>
+          <svg width="16" height="16" viewBox="0 0 24 24">
+            <path d="M19 7l-.867 12.142A2 2 0 0 1 16.138 21H7.862a2 2 0 0 1-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v3m4.5-3.5l-5 5m5-5l-5-5"></path>
+          </svg>
+          Reset All
+        </button>
       </div>
 
-      <div class="filter-group">
-        <div class="filter-label">
-          <div class="filter-icon-container">
-            <svg class="filter-icon" viewBox="0 0 24 24" aria-hidden="true">
-              <path
-                d="M12 2a8 8 0 0 0-8 8c0 7 8 12 8 12s8-5 8-12a8 8 0 0 0-8-8z"
-                stroke-width="2"></path>
-              <circle cx="12" cy="10" r="3" stroke-width="2"></circle>
-            </svg>
+      <div class="card-body" [class.d-none]="!showFilter">
+        <div class="row g-3">
+          <div class="col-md-4">
+            <label class="form-label d-flex align-items-center gap-2">
+              <svg class="filter-icon" width="18" height="18" viewBox="0 0 24 24">
+                <path d="M4 6h16M4 12h16M4 18h16" stroke="#9b59b6" stroke-width="2" stroke-linecap="round"></path>
+              </svg>
+              Fragrance Family
+            </label>
+            <select class="form-select" [(ngModel)]="selectedCategory" (change)="applyFilters()">
+              <option *ngFor="let category of categories" [value]="category">{{category}}</option>
+            </select>
           </div>
-          <label for="country-filter">Origin Country</label>
-        </div>
-        <div class="select-wrapper">
-          <select id="country-filter" [(ngModel)]="selectedCountry"
-            (change)="applyFilters()" class="styled-select">
-            <option *ngFor="let country of countries"
-              [value]="country">{{country}}</option>
-          </select>
-          <div class="select-arrow"></div>
-        </div>
-      </div>
 
-      <div class="filter-group">
-        <div class="filter-label">
-          <div class="filter-icon-container">
-            <svg class="filter-icon" viewBox="0 0 24 24" aria-hidden="true">
-              <path d="M3 6h18M7 12h10M5 18h14" stroke-width="2"
-                stroke-linecap="round"></path>
-            </svg>
+          <div class="col-md-4">
+            <label class="form-label d-flex align-items-center gap-2">
+              <svg class="filter-icon" width="18" height="18" viewBox="0 0 24 24">
+                <path d="M12 2a8 8 0 0 0-8 8c0 7 8 12 8 12s8-5 8-12a8 8 0 0 0-8-8z" stroke="#9b59b6" stroke-width="2"></path>
+                <circle cx="12" cy="10" r="3" stroke="#9b59b6" stroke-width="2"></circle>
+              </svg>
+              Origin Country
+            </label>
+            <select class="form-select" [(ngModel)]="selectedCountry" (change)="applyFilters()">
+              <option *ngFor="let country of countries" [value]="country">{{country}}</option>
+            </select>
           </div>
-          <label for="sort-filter">Sort Options</label>
-        </div>
-        <div class="select-wrapper">
-          <select id="sort-filter" [(ngModel)]="sortOption"
-            (change)="applyFilters()" class="styled-select">
-            <option value="featured">Featured</option>
-            <option value="price-low">Price: Low to High</option>
-            <option value="price-high">Price: High to Low</option>
-            <option value="name-asc">Name: A-Z</option>
-            <option value="name-desc">Name: Z-A</option>
-          </select>
-          <div class="select-arrow"></div>
+
+          <div class="col-md-4">
+            <label class="form-label d-flex align-items-center gap-2">
+              <svg class="filter-icon" width="18" height="18" viewBox="0 0 24 24">
+                <path d="M3 6h18M7 12h10M5 18h14" stroke="#9b59b6" stroke-width="2" stroke-linecap="round"></path>
+              </svg>
+              Sort Options
+            </label>
+            <select class="form-select" [(ngModel)]="sortOption" (change)="applyFilters()">
+              <option value="featured">Featured</option>
+              <option value="price-low">Price: Low to High</option>
+              <option value="price-high">Price: High to Low</option>
+              <option value="name-asc">Name: A-Z</option>
+              <option value="name-desc">Name: Z-A</option>
+            </select>
+          </div>
         </div>
       </div>
     </div>
   </div>
 
-  <main class="products-main-content">
-    <div class="container-fluid">
-      <section aria-labelledby="products-grid-heading">
-        <h2 id="products-grid-heading" class="sr-only">Fragrance Products</h2>
-        <div class="loading-state" *ngIf="isLoading" aria-live="polite"
-          aria-busy="true">
-          <div class="spinner" aria-hidden="true"></div>
-          <p>Loading fragrances...</p>
-        </div>
-
-        @if (!isLoading && displayedProducts.length > 0) {
-        <div
-          class="d-flex justify-content-center align-items-center flex-wrap">
-          <perfume-card
-            *ngFor="let product of displayedProducts; trackBy: trackById"
-            class="col-md-6 col-lg-4 col-xl-3"
-            [perfume]="product">
-          </perfume-card>
-        </div>
-        }
-
-        <div class="empty-state"
-          *ngIf="!isLoading && filteredProducts.length === 0"
-          aria-live="polite">
-          <div class="empty-state-icon" aria-hidden="true">😕</div>
-          <h3 class="empty-state-title">No fragrances match your filters</h3>
-          <p class="empty-state-message">Try adjusting your search criteria</p>
-          <button class="reset-filters-button"
-            (click)="resetFilters($event)"
-            aria-label="Reset all filters">
-            Reset All Filters
-          </button>
-        </div>
-      </section>
-
-      <!-- Pagination -->
-      <nav class="pagination" *ngIf="!isLoading && filteredProducts.length > 0"
-        aria-label="Products pagination">
-        <button class="pagination-button pagination-prev"
-          [disabled]="currentPage === 1"
-          (click)="previousPage()"
-          aria-label="Go to previous page">
-          <span class="pagination-icon pagination-icon-prev"
-            aria-hidden="true">←</span>
-          Previous
-        </button>
-
-        <span class="pagination-status" aria-live="polite">
-          Page {{currentPage}} of {{totalPages}}
-        </span>
-
-        <button class="pagination-button pagination-next"
-          [disabled]="currentPage === totalPages"
-          (click)="nextPage()"
-          aria-label="Go to next page">
-          Next
-          <span class="pagination-icon pagination-icon-next"
-            aria-hidden="true">→</span>
-        </button>
-      </nav>
+  <main class="container mb-5">
+    <div *ngIf="isLoading" class="text-center py-5">
+      <div class="spinner-border text-primary mb-3 spinner-lg"></div>
+      <p class="fs-5 text-muted">Loading fragrances...</p>
     </div>
+    @if (!isLoading && displayedProducts.length > 0) {
+      <div class="row g-4">
+        @for (product of displayedProducts; track product.id) {
+          <div class="col-md-6 col-lg-4 col-xl-3">
+            <perfume-card [perfume]="product"></perfume-card>
+          </div>
+        }
+      </div>
+    }
+    @if (!isLoading && filteredProducts.length === 0) {
+      <div class="card shadow-sm text-center py-5">
+        <div class="empty-state-icon fs-1 mb-3">😕</div>
+        <h3 class="mb-2">No fragrances match your filters</h3>
+        <p class="text-muted mb-4">Try adjusting your search criteria</p>
+        <button class="btn btn-primary mx-auto" (click)="resetFilters($event)">
+          Reset All Filters
+        </button>
+      </div>
+    }
+    @if (!isLoading && filteredProducts.length > 0) {
+      <nav class="d-flex justify-content-center mt-5">
+        <ul class="pagination">
+          <li class="page-item" [class.disabled]="currentPage === 1">
+            <a class="page-link" (click)="previousPage()" type="button">Previous</a>
+          </li>
+          <li class="page-item disabled">
+            <span class="page-link">Page {{currentPage}} of {{totalPages}}</span>
+          </li>
+          <li class="page-item" [class.disabled]="currentPage === totalPages">
+            <a class="page-link" (click)="nextPage()" type="button">Next</a>
+          </li>
+        </ul>
+      </nav>
+    }
   </main>
 </div>

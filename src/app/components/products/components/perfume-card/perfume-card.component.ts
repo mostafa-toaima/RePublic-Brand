@@ -2,9 +2,8 @@ import { Component, inject, Input, OnInit } from '@angular/core';
 import { Perfume } from '../../../../common/models/perfume.model';
 import { Router } from '@angular/router';
 import { CartService } from '../../../../common/services/cart.service';
-import { PerfumeService } from '../../../../common/services/perfume.service';
-import { ProductsService } from '../../services/products.service';
 import { WishlistService } from '../../../../common/services/wishlist.service';
+import { PerfumesService } from '../../services/perfumes.service';
 
 @Component({
   selector: 'perfume-card',
@@ -22,8 +21,7 @@ export class PerfumeCardComponent implements OnInit {
 
   router = inject(Router);
   cartService = inject(CartService);
-  perfumeService = inject(PerfumeService);
-  productSerivce = inject(ProductsService);
+  perfumeService = inject(PerfumesService);
   wishListService = inject(WishlistService);
 
   ngOnInit(): void {

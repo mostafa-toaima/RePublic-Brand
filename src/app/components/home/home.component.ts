@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { Perfume } from '../../common/models/perfume.model';
-import { PerfumeService } from '../../common/services/perfume.service';
 import { filter } from 'rxjs';
+import { PerfumesService } from '../products/services/perfumes.service';
 
 
 @Component({
@@ -15,7 +15,7 @@ export class HomeComponent implements OnInit {
   isLoading = true;
 
   constructor(
-    private perfumeService: PerfumeService,
+    private perfumeService: PerfumesService,
     private router: Router
   ) { }
 
