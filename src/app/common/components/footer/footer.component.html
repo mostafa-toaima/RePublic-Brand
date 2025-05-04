@@ -1,11 +1,12 @@
-<footer class="site-footer">
-  <div class="footer-container">
-    <div class="footer-main">
+<footer class="site-footer position-relative">
+  <div class="footer-container my-0 mx-auto">
+    <div
+      class="footer-main d-flex justify-content-around align-items-stretch ">
       <div class="footer-brand">
-        <h3 class="footer-logo">Scents of the World</h3>
-        <p class="footer-tagline">Discover premium fragrances from every corner
+        <h3 class="footer-logo ms-2">REpUBLIC</h3>
+        <p class="footer-tagline ms-2">Discover fragrances from every corner
           of the globe</p>
-        <div class="social-links">
+        <div class="social-links d-flex gap-4 ms-1 mb-3">
           <a href="https://www.facebook.com/share/19D416MMYu/" target="_blank"
             aria-label="Facebook"><i
               class="bi bi-facebook"></i></a>
@@ -23,16 +24,19 @@
       <div class="footer-links">
         <div class="links-column">
           <h4 class="links-title">Shop</h4>
-          <ul>
-            <li (click)="exploreCollectionFor('men')"><a>For Men</a></li>
-            <li (click)="exploreCollectionFor('woman')"><a>For Women</a></li>
+          <ul class="list-unstyled p-0">
+            <li (click)="exploreCollectionFor('men')"><a type="button">For
+                Men</a></li>
+            <li (click)="exploreCollectionFor('woman')"><a type="button">For
+                Women</a></li>
           </ul>
         </div>
       </div>
     </div>
-    <div class="footer-bottom">
+    <div
+      class="footer-bottom text-center d-flex align-items-center flex-column">
       <div class="copyright">
-        &copy; {{ currentYear }} Scents of the World. All rights reserved.
+        &copy; {{ currentYear }} REpUBLIC. All rights reserved.
       </div>
     </div>
   </div>
