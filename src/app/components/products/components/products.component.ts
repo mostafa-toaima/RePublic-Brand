@@ -38,6 +38,14 @@ export class ProductsComponent implements OnInit, OnDestroy {
     this.initializeComponent();
   }
 
+  getById(id: string): void {
+    this.perfumeService.getPerfumeById(id)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(perfume => {
+        console.log("perfume By Id", perfume);
+      });
+  }
+
   ngOnDestroy(): void {
     this.destroy$.next();
     this.destroy$.complete();
@@ -52,7 +60,11 @@ export class ProductsComponent implements OnInit, OnDestroy {
     this.route.queryParamMap
       .pipe(takeUntil(this.destroy$))
       .subscribe(params => {
-        this.selectedCategory = params.get('type') || 'ALL';
+        if (params.get('type')) {
+          this.selectedCategory = params.get('type') || 'ALL';
+        } else if (params.get('country')) {
+          this.selectedCountry = params.get('country') || 'ALL';
+        }
         if (this.allProducts.length) {
           this.applyFilters();
         }

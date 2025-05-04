@@ -27,7 +27,6 @@
         </li>
       </ul>
 
-      <!-- Categories dropdown -->
       <div class="dropdown me-3">
         <button class="btn dropdown-toggle" type="button"
           id="dropdownMenuButton1"
@@ -49,7 +48,6 @@
       </div>
     </div>
 
-    <!-- Cart icon -->
     <div class="d-flex align-items-center">
       <div class="cart-icon ms-2 m-2">
         <button class="btn position-relative" (click)="openCart()">
@@ -57,15 +55,6 @@
           <span
             class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
             {{ cartItemCount }}
-          </span>
-        </button>
-      </div>
-      <div class="cart-icon ms-2 m-2">
-        <button class="btn position-relative" (click)="openWishList()">
-          <i class="bi bi-heart-fill fs-4 text-light"></i>
-          <span
-            class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-            {{ wishlistItemCount }}
           </span>
         </button>
       </div>

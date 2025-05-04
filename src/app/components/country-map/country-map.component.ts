@@ -273,15 +273,7 @@ export class CountryMapComponent implements OnInit, OnChanges {
   }
 
   private onCountryClick(event: any, countryData: any): void {
-    if (this.isAvailableCountry(countryData.properties.name)) {
-      d3.select(event.target)
-        .style('transform', 'scale(0.95)')
-        .transition()
-        .duration(300)
-        .style('transform', 'scale(1)');
-
       this.countrySelected.emit(countryData.properties.name);
-    }
   }
 
   private showTooltip(event: any, countryName: string): void {

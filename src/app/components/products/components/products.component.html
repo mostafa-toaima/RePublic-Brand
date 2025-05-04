@@ -1,27 +1,36 @@
 <div class="products-page">
-  <section class="products-hero position-relative d-flex align-items-center mb-5 bg-dark">
-    <div class="position-absolute top-0 start-0 w-100 h-100 bg-gradient-bottom-dark"></div>
+  <section
+    class="products-hero position-relative d-flex align-items-center mb-5 bg-dark">
+    <div
+      class="position-absolute top-0 start-0 w-100 h-100 bg-gradient-bottom-dark"></div>
     <div class="container text-center text-white z-1">
-      <h1 class="display-4 mb-3 text-uppercase fw-light">Our Fragrance Collection</h1>
+      <h1 class="display-4 mb-3 text-uppercase fw-light">Our Fragrance
+        Collection</h1>
       <p class="fs-4">Discover exquisite scents from around the world</p>
     </div>
   </section>
 
   <div class="container mb-4">
     <div class="card shadow-sm border-0 overflow-hidden">
-      <div class="card-header bg-white d-flex justify-content-between align-items-center filter-header"
-           (click)="toggleShowFilter()">
+      <div
+        class="card-header bg-white d-flex justify-content-between align-items-center filter-header"
+        (click)="toggleShowFilter()">
         <h2 class="mb-0 d-flex align-items-center gap-2">
-          <svg class="toggle-icon" [class.rotated]="showFilter" width="24" height="24" viewBox="0 0 24 24">
-            <path class="vertical" d="M12 5v14" stroke="#7f8c8d" stroke-width="2"></path>
-            <path class="horizontal" d="M5 12h14" stroke="#7f8c8d" stroke-width="2"></path>
+          <svg class="toggle-icon" [class.rotated]="showFilter" width="24"
+            height="24" viewBox="0 0 24 24">
+            <path class="vertical" d="M12 5v14" stroke="#7f8c8d"
+              stroke-width="2"></path>
+            <path class="horizontal" d="M5 12h14" stroke="#7f8c8d"
+              stroke-width="2"></path>
           </svg>
           <span>Filter & Sort</span>
         </h2>
-        <button class="btn btn-sm btn-outline-danger d-flex align-items-center gap-1"
-                (click)="resetFilters($event)" stopPropagation>
+        <button
+          class="btn btn-sm btn-outline-danger d-flex align-items-center gap-1"
+          (click)="resetFilters($event)" stopPropagation>
           <svg width="16" height="16" viewBox="0 0 24 24">
-            <path d="M19 7l-.867 12.142A2 2 0 0 1 16.138 21H7.862a2 2 0 0 1-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v3m4.5-3.5l-5 5m5-5l-5-5"></path>
+            <path
+              d="M19 7l-.867 12.142A2 2 0 0 1 16.138 21H7.862a2 2 0 0 1-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v3m4.5-3.5l-5 5m5-5l-5-5"></path>
           </svg>
           Reset All
         </button>
@@ -31,37 +40,50 @@
         <div class="row g-3">
           <div class="col-md-4">
             <label class="form-label d-flex align-items-center gap-2">
-              <svg class="filter-icon" width="18" height="18" viewBox="0 0 24 24">
-                <path d="M4 6h16M4 12h16M4 18h16" stroke="#9b59b6" stroke-width="2" stroke-linecap="round"></path>
+              <svg class="filter-icon" width="18" height="18"
+                viewBox="0 0 24 24">
+                <path d="M4 6h16M4 12h16M4 18h16" stroke="#9b59b6"
+                  stroke-width="2" stroke-linecap="round"></path>
               </svg>
               Fragrance Family
             </label>
-            <select class="form-select" [(ngModel)]="selectedCategory" (change)="applyFilters()">
-              <option *ngFor="let category of categories" [value]="category">{{category}}</option>
+            <select class="form-select" [(ngModel)]="selectedCategory"
+              (change)="applyFilters()">
+              <option *ngFor="let category of categories"
+                [value]="category">{{category}}</option>
             </select>
           </div>
 
           <div class="col-md-4">
             <label class="form-label d-flex align-items-center gap-2">
-              <svg class="filter-icon" width="18" height="18" viewBox="0 0 24 24">
-                <path d="M12 2a8 8 0 0 0-8 8c0 7 8 12 8 12s8-5 8-12a8 8 0 0 0-8-8z" stroke="#9b59b6" stroke-width="2"></path>
-                <circle cx="12" cy="10" r="3" stroke="#9b59b6" stroke-width="2"></circle>
+              <svg class="filter-icon" width="18" height="18"
+                viewBox="0 0 24 24">
+                <path
+                  d="M12 2a8 8 0 0 0-8 8c0 7 8 12 8 12s8-5 8-12a8 8 0 0 0-8-8z"
+                  stroke="#9b59b6" stroke-width="2"></path>
+                <circle cx="12" cy="10" r="3" stroke="#9b59b6"
+                  stroke-width="2"></circle>
               </svg>
               Origin Country
             </label>
-            <select class="form-select" [(ngModel)]="selectedCountry" (change)="applyFilters()">
-              <option *ngFor="let country of countries" [value]="country">{{country}}</option>
+            <select class="form-select" [(ngModel)]="selectedCountry"
+              (change)="applyFilters()">
+              <option *ngFor="let country of countries"
+                [value]="country">{{country}}</option>
             </select>
           </div>
 
           <div class="col-md-4">
             <label class="form-label d-flex align-items-center gap-2">
-              <svg class="filter-icon" width="18" height="18" viewBox="0 0 24 24">
-                <path d="M3 6h18M7 12h10M5 18h14" stroke="#9b59b6" stroke-width="2" stroke-linecap="round"></path>
+              <svg class="filter-icon" width="18" height="18"
+                viewBox="0 0 24 24">
+                <path d="M3 6h18M7 12h10M5 18h14" stroke="#9b59b6"
+                  stroke-width="2" stroke-linecap="round"></path>
               </svg>
               Sort Options
             </label>
-            <select class="form-select" [(ngModel)]="sortOption" (change)="applyFilters()">
+            <select class="form-select" [(ngModel)]="sortOption"
+              (change)="applyFilters()">
               <option value="featured">Featured</option>
               <option value="price-low">Price: Low to High</option>
               <option value="price-high">Price: High to Low</option>
@@ -80,38 +102,41 @@
       <p class="fs-5 text-muted">Loading fragrances...</p>
     </div>
     @if (!isLoading && displayedProducts.length > 0) {
-      <div class="row g-4">
-        @for (product of displayedProducts; track product.id) {
-          <div class="col-md-6 col-lg-4 col-xl-3">
-            <perfume-card [perfume]="product"></perfume-card>
-          </div>
-        }
+    <div class="row g-4">
+      @for (product of displayedProducts; track product.id) {
+      <div class="col-md-6 col-lg-4 col-xl-3">
+        <perfume-card [perfume]="product"></perfume-card>
       </div>
+      }
+    </div>
     }
     @if (!isLoading && filteredProducts.length === 0) {
-      <div class="card shadow-sm text-center py-5">
-        <div class="empty-state-icon fs-1 mb-3">😕</div>
-        <h3 class="mb-2">No fragrances match your filters</h3>
-        <p class="text-muted mb-4">Try adjusting your search criteria</p>
-        <button class="btn btn-primary mx-auto" (click)="resetFilters($event)">
-          Reset All Filters
-        </button>
-      </div>
+    <div class="card shadow-sm text-center py-5">
+      <div class="empty-state-icon fs-1 mb-3">😕</div>
+      <h3 class="mb-2">No fragrances match your filters</h3>
+      <p class="text-muted mb-4">Try adjusting your search criteria</p>
+      <button class="btn btn-primary mx-auto" (click)="resetFilters($event)">
+        Reset All Filters
+      </button>
+    </div>
     }
     @if (!isLoading && filteredProducts.length > 0) {
-      <nav class="d-flex justify-content-center mt-5">
-        <ul class="pagination">
-          <li class="page-item" [class.disabled]="currentPage === 1">
-            <a class="page-link" (click)="previousPage()" type="button">Previous</a>
-          </li>
-          <li class="page-item disabled">
-            <span class="page-link">Page {{currentPage}} of {{totalPages}}</span>
-          </li>
-          <li class="page-item" [class.disabled]="currentPage === totalPages">
-            <a class="page-link" (click)="nextPage()" type="button">Next</a>
-          </li>
-        </ul>
-      </nav>
+    <nav class="d-flex justify-content-center mt-5">
+      <ul class="pagination">
+        <li class="page-item" [class.disabled]="currentPage === 1">
+          <a class="page-link" (click)="previousPage()"
+            type="button">Previous</a>
+        </li>
+        <li class="page-item disabled">
+          <span class="page-link">Page {{currentPage}} of {{totalPages}}</span>
+        </li>
+        <li class="page-item" [class.disabled]="currentPage === totalPages">
+          <a class="page-link" (click)="nextPage()" type="button">Next</a>
+        </li>
+      </ul>
+    </nav>
     }
   </main>
 </div>
+
+<button (click)="getById('1DZL7UBOQmCXYsU43xXs')">Get BY Id</button>

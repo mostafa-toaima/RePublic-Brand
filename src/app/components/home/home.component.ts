@@ -40,7 +40,7 @@ export class HomeComponent implements OnInit {
   }
 
   onCountrySelected(country: string): void {
-    this.router.navigate(['/country', country]);
+    this.router.navigate(['/products'], { queryParams: { country } });
   }
 
   exploreCollection() {

@@ -24,6 +24,12 @@ export class PerfumesService {
     return this.firestore.doc<Perfume>(`perfumes/${id}`).valueChanges();
   }
 
+  getPerfumeByCountry(country: string): Observable<Perfume[]> {
+    return this.firestore.collection<Perfume>('perfumes', ref =>
+      ref.where('country', '==', country)
+    ).valueChanges({ idField: 'id' });
+  }
+
   getCountries(): Observable<string[]> {
     return this.firestore.collection<Perfume>('perfumes').valueChanges()
       .pipe(
@@ -41,6 +47,7 @@ export class PerfumesService {
       ref.where('isBestSeller', '==', true).limit(3)
     ).valueChanges({ idField: 'id' });
   }
+
   updatePerfume(id: any, data: Partial<Perfume>): Promise<void> {
     return this.firestore.doc<Perfume>(`perfumes/${id}`).update(data);
   }
