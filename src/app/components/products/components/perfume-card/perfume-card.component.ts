@@ -16,8 +16,7 @@ export class PerfumeCardComponent implements OnInit {
   showNotes: boolean = false;
   addedToCart: boolean = false;
   isInWishlist: boolean = false;
-  selectedSize: string = '50';
-  availableSizes: string[] = ['30', '50', '100'];
+  showFull: boolean = false;
 
   router = inject(Router);
   cartService = inject(CartService);

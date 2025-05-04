@@ -27,7 +27,12 @@
         </div>
       </div>
     </div>
-    <p class="description">{{ perfume.description }}</p>
+    <p
+      class="description"
+      [class.truncated]="!showFull"
+      (click)="showFull = !showFull">
+      {{ perfume.description }}
+    </p>
     <div class="features">
       <span class="feature-tag" *ngFor="let feature of perfume.features">
         <i class="feature-icon" [class]="getFeatureIcon(feature)"></i>

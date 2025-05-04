@@ -26,7 +26,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
   sortOption: string = 'featured';
 
   currentPage: number = 1;
-  productsPerPage: number = 4;
+  productsPerPage: number = 3;
   totalPages: number = 1;
   pageNumbers: number[] = [];
 
