@@ -7,7 +7,6 @@
       <div class="step"><span>3</span> Confirmation</div>
     </div>
   </div>
-
   <div *ngIf="cartItems.length === 0 && !orderSubmitted" class="empty-cart">
     <div class="empty-cart-icon">
       <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80"
@@ -30,7 +29,6 @@
       Explore Our Collection
     </a>
   </div>
-
   <div *ngIf="orderSubmitted" class="order-confirmation">
     <div class="confirmation-card">
       <div class="confirmation-icon success">
@@ -53,17 +51,15 @@
       </div>
     </div>
   </div>
-
   <div *ngIf="cartItems.length > 0 && !orderSubmitted" class="cart-content">
     <div class="cart-items-section">
-      <div class="cart-items-header">
+      <div
+        class="d-flex align-items-center justify-content-between cart-items-header ">
         <h3>Your Selected Fragrances</h3>
-        <div class="header-details">
-          <span>Q</span>
-          <span>Total</span>
-        </div>
+        <button class="btn btn-outline-danger"
+          (click)="clearCart()">Clear <i><i
+              class="bi bi-trash"></i></i></button>
       </div>
-
       <div class="cart-items-list">
         <div *ngFor="let item of cartItems; trackBy: trackByPerfumeId"
           class="cart-item-card">
@@ -83,7 +79,6 @@
           <div class="item-details">
             <h4 class="item-name">{{ item.perfume.name }}</h4>
             <p class="item-brand">{{ item.perfume.category }}</p>
-            <p class="item-size">{{ item.perfume.price || '100' }}ml</p>
             <p class="item-price">{{ item.perfume.price |
               currency:'EGP ':'symbol':'1.2-2' }}</p>
           </div>
@@ -118,26 +113,15 @@
     <div class="checkout-summary">
       <div class="summary-card">
         <h3 class="summary-title">Order Summary</h3>
-
         <div class="summary-row">
           <span>Subtotal ({{cartItems.length}} items)</span>
           <span>{{ totalPrice | currency:'EGP ':'symbol':'1.2-2' }}</span>
         </div>
-        <div class="summary-row">
-          <span>Shipping</span>
-          <span class="free-shipping">Complimentary</span>
-        </div>
-        <div class="summary-row">
-          <span>Estimated Tax</span>
-          <span>0</span>
-        </div>
-
         <div class="summary-total">
           <span>Total</span>
           <span class="total-amount">{{ totalPrice |
             currency:'EGP ':'symbol':'1.2-2' }}</span>
         </div>
-
         <form [formGroup]="checkoutForm" (ngSubmit)="onSubmit()"
           class="checkout-form">
           <div class="form-group">

@@ -1,4 +1,3 @@
-/* Global Styles */
 * {
   margin: 0;
   padding: 0;
@@ -21,13 +20,11 @@ button {
   cursor: pointer;
 }
 
-/* Responsive images */
 img {
   max-width: 100%;
   height: auto;
 }
 
-/* Utility classes */
 .text-center {
   text-align: center;
 }
@@ -38,7 +35,6 @@ img {
   padding: 0 20px;
 }
 
-/* Animation for route transitions */
 .route-animation {
   animation: fadeIn 0.5s ease;
 }

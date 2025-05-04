@@ -1,6 +1,5 @@
 @import '../../../../../assets/styles/vars.scss';
 
-/* Base Styles */
 .cart-container {
   max-width: 1200px;
   margin: 6rem auto;
@@ -38,7 +37,7 @@
     left: 50%;
     right: 50%;
     height: 1px;
-    background: #e0e0e0;
+    background: $border-color;
     z-index: 1;
   }
 
@@ -49,7 +48,7 @@
     padding: 0 3rem;
     position: relative;
     z-index: 2;
-    color: #999;
+    color: $light-text;
 
     span {
       display: flex;
@@ -58,11 +57,11 @@
       width: 36px;
       height: 36px;
       border-radius: 50%;
-      background: #f8f8f8;
-      color: #999;
+      background: $bg-color;
+      color: $light-text;
       margin-bottom: 0.75rem;
       font-weight: 600;
-      border: 2px solid #e0e0e0;
+      border: 2px solid $border-color;
       transition: all 0.3s ease;
     }
 
@@ -71,7 +70,7 @@
 
       span {
         background: $gold-color;
-        color: white;
+        color: $white-color;
         border-color: $gold-color;
         box-shadow: 0 4px 8px rgba($gold-color, 0.2);
       }
@@ -84,7 +83,7 @@
       right: 0;
       width: 6rem;
       height: 1px;
-      background: #e0e0e0;
+      background: $border-color;
     }
   }
 }
@@ -109,7 +108,7 @@
   }
 
   p {
-    color: #666;
+    color: $secondary-text;
     font-size: 1.2rem;
     margin-bottom: 2.5rem;
     line-height: 1.6;
@@ -121,7 +120,7 @@
   align-items: center;
   padding: 1rem 2rem;
   background: $gold-color;
-  color: white;
+  color: $white-color;
   text-decoration: none;
   border-radius: 30px;
   font-weight: 500;
@@ -135,7 +134,7 @@
   }
 
   &:hover {
-    background: darken($gold-color, 8%);
+    background: $gold-hover;
     transform: translateY(-2px);
     box-shadow: 0 6px 16px rgba($gold-color, 0.3);
 
@@ -154,7 +153,7 @@
 }
 
 .confirmation-card {
-  background: white;
+  background: $white-color;
   border-radius: 16px;
   padding: 4rem;
   text-align: center;
@@ -165,10 +164,6 @@
 
   .confirmation-icon {
     margin-bottom: 2rem;
-
-    svg {
-      stroke-width: 1.5;
-    }
   }
 
   h2 {
@@ -180,13 +175,13 @@
 
   .confirmation-text {
     font-size: 1.2rem;
-    color: #444;
+    color: $text-color;
     margin-bottom: 1rem;
     line-height: 1.6;
   }
 
   .confirmation-details {
-    color: #666;
+    color: $secondary-text;
     margin-bottom: 3rem;
     line-height: 1.6;
     font-size: 1.1rem;
@@ -208,20 +203,8 @@
     font-size: 1.05rem;
   }
 
-  .view-orders-btn {
-    background: $primary-color;
-    color: white;
-    box-shadow: 0 4px 12px rgba($primary-color, 0.2);
-
-    &:hover {
-      background: darken($primary-color, 8%);
-      transform: translateY(-2px);
-      box-shadow: 0 6px 16px rgba($primary-color, 0.3);
-    }
-  }
-
   .continue-shopping-btn {
-    background: white;
+    background: $white-color;
     color: $primary-color;
     border: 1px solid $primary-color;
 
@@ -248,9 +231,6 @@
 }
 
 .cart-items-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
   padding: 1.5rem 0;
   border-bottom: 1px solid rgba($primary-color, 0.1);
   margin-bottom: 1rem;
@@ -259,19 +239,6 @@
     font-size: 1.4rem;
     font-weight: 600;
     color: $primary-color;
-  }
-
-  .header-details {
-    display: flex;
-    gap: 4rem;
-
-    span {
-      color: #666;
-      font-size: 0.95rem;
-      min-width: 70px;
-      text-align: center;
-      font-weight: 500;
-    }
   }
 }
 
@@ -303,7 +270,7 @@
   flex-shrink: 0;
   border-radius: 12px;
   overflow: hidden;
-  background: #f9f9f9;
+  background: $bg-color;
 
   .item-image {
     width: 100%;
@@ -319,7 +286,7 @@
     right: -6px;
     width: 28px;
     height: 28px;
-    background: white;
+    background: $white-color;
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -331,19 +298,8 @@
     z-index: 2;
 
     &:hover {
-      background: #f8f8f8;
+      background: darken($white-color, 5%);
       transform: scale(1.1);
-
-      svg {
-        stroke: $primary-color;
-      }
-    }
-
-    svg {
-      width: 14px;
-      height: 14px;
-      stroke: #666;
-      transition: stroke 0.2s ease;
     }
   }
 }
@@ -363,16 +319,15 @@
   }
 
   .item-brand {
-    color: #666;
+    color: $secondary-text;
     font-size: 0.95rem;
     margin-bottom: 0.75rem;
     text-transform: uppercase;
     letter-spacing: 0.5px;
   }
 
-  .item-size,
   .item-price {
-    color: #888;
+    color: $light-text;
     font-size: 0.95rem;
     margin-bottom: 0.25rem;
   }
@@ -386,8 +341,8 @@
   .quantity-btn {
     width: 36px;
     height: 36px;
-    background: white;
-    border: 1px solid #e0e0e0;
+    background: $white-color;
+    border: 1px solid $border-color;
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -398,8 +353,8 @@
     font-weight: 500;
 
     &:hover:not(:disabled) {
-      background: #f8f8f8;
-      border-color: #ccc;
+      background: darken($white-color, 5%);
+      border-color: darken($border-color, 10%);
     }
 
     &:disabled {
@@ -408,7 +363,7 @@
     }
 
     &.minus {
-      color: #999;
+      color: $light-text;
     }
 
     &.plus {
@@ -455,7 +410,7 @@
     }
 
     &:hover {
-      color: darken($gold-color, 10%);
+      color: $gold-hover;
       background: rgba($gold-color, 0.1);
 
       svg {
@@ -472,7 +427,7 @@
 }
 
 .summary-card {
-  background: white;
+  background: $white-color;
   border-radius: 16px;
   padding: 2rem;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
@@ -494,11 +449,11 @@
   display: flex;
   justify-content: space-between;
   margin-bottom: 1rem;
-  color: #666;
+  color: $secondary-text;
   font-size: 1rem;
 
   .free-shipping {
-    color: #4CAF50;
+    color: $success-color;
     font-weight: 500;
   }
 }
@@ -540,18 +495,18 @@
   textarea {
     width: 100%;
     padding: 0.9rem 1.2rem;
-    border: 1px solid #e0e0e0;
+    border: 1px solid $border-color;
     border-radius: 8px;
     font-family: inherit;
     font-size: 1rem;
     transition: all 0.3s ease;
-    background: #f9f9f9;
+    background: $bg-color;
 
     &:focus {
       outline: none;
       border-color: $gold-color;
       box-shadow: 0 0 0 3px rgba($gold-color, 0.1);
-      background: white;
+      background: $white-color;
     }
 
     &.invalid {
@@ -615,25 +570,25 @@
     align-items: center;
     justify-content: space-between;
     padding: 1rem 1.5rem;
-    border: 1px solid #e0e0e0;
+    border: 1px solid $border-color;
     border-radius: 8px;
     transition: all 0.3s ease;
-    background: #f9f9f9;
+    background: $bg-color;
 
     span {
-      color: #555;
+      color: $text-color;
       font-weight: 500;
     }
 
     svg {
-      color: #999;
+      color: $light-text;
       transition: all 0.3s ease;
     }
   }
 
   &:hover .payment-content {
-    border-color: #ccc;
-    background: white;
+    border-color: darken($border-color, 10%);
+    background: $white-color;
   }
 
   &.selected .payment-content {
@@ -650,7 +605,7 @@
     cursor: not-allowed;
 
     .payment-content {
-      background: #f5f5f5;
+      background: darken($bg-color, 5%);
     }
   }
 }
@@ -660,7 +615,7 @@
   width: 100%;
   padding: 1.2rem;
   background: $gold-color;
-  color: white;
+  color: $white-color;
   border: none;
   border-radius: 8px;
   font-size: 1.1rem;
@@ -673,13 +628,13 @@
   box-shadow: 0 4px 12px rgba($gold-color, 0.3);
 
   &:hover:not(:disabled) {
-    background: darken($gold-color, 8%);
+    background: $gold-hover;
     transform: translateY(-2px);
     box-shadow: 0 6px 16px rgba($gold-color, 0.4);
   }
 
   &:disabled {
-    background: #ddd;
+    background: $disabled-color;
     cursor: not-allowed;
     box-shadow: none;
   }
@@ -689,9 +644,9 @@
   display: inline-block;
   width: 20px;
   height: 20px;
-  border: 3px solid rgba(255, 255, 255, 0.3);
+  border: 3px solid rgba($white-color, 0.3);
   border-radius: 50%;
-  border-top-color: white;
+  border-top-color: $white-color;
   animation: spin 1s ease-in-out infinite;
 }
 
@@ -700,7 +655,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #666;
+  color: $secondary-text;
   font-size: 0.9rem;
   margin: 1.5rem 0;
   padding-top: 1.5rem;
@@ -708,7 +663,7 @@
 
   svg {
     margin-right: 0.5rem;
-    color: #4CAF50;
+    color: $success-color;
   }
 }
 

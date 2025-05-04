@@ -64,8 +64,10 @@ export class CartComponent implements OnInit, OnDestroy {
     }
   }
 
-  // In your cart.component.ts
-  // Add this debug line before sending emails
+  clearCart() {
+    this.cartService.clearCart();
+  }
+
   async onSubmit(): Promise<void> {
     if (this.checkoutForm.invalid || this.isLoading) return;
 
