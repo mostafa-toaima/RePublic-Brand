@@ -20,10 +20,6 @@ export class PerfumesService {
     ).valueChanges({ idField: 'id' });
   }
 
-  getPerfumeById(id: string): Observable<Perfume | undefined> {
-    return this.firestore.doc<Perfume>(`perfumes/${id}`).valueChanges();
-  }
-
   getPerfumeByCountry(country: string): Observable<Perfume[]> {
     return this.firestore.collection<Perfume>('perfumes', ref =>
       ref.where('country', '==', country)
