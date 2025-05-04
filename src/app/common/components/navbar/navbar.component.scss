@@ -1,5 +1,7 @@
+@import'../../../../assets/styles/vars.scss';
+
 .custom-navbar {
-  background-color: #000000a6 !important;
+  background-color: $dark-bg !important;
   backdrop-filter: blur(10px) !important;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1) !important;
 
@@ -27,17 +29,17 @@
     }
 
     &.active {
-      color: #f8f9fa !important;
+      color: $white-color !important;
       transform: scale(1.1);
     }
   }
 
   a {
-    color: #f8f9fa !important;
+    color: $white-color !important;
     text-decoration: none;
 
     &:hover {
-      color: #f8f9fa !important;
+      color: $white-color !important;
       text-decoration: none;
     }
   }
@@ -53,30 +55,29 @@
 
   .dropdown-menu {
     a {
-      color: #000 !important;
-      background-color: #f8f9fa !important;
+      color: $black-color !important;
+      background-color: $white-color !important;
     }
   }
 }
 
 .dropdown-toggle {
-  color: beige !important;
+  color: $bg-color !important;
 
   .dropdown-item.active {
-    background-color: #000 !important;
-    color: #f8f9fa !important;
+    background-color: $black-color !important;
+    color: $white-color !important;
 
   }
 }
 
 .custom-navbar-toggler-icon {
-  border: 1px solid wheat;
+  border: 1px solid $light-text !important;
 }
 
-/* Cart icon style */
 .cart-icon {
   .btn {
-    color: #f8f9fa;
+    color: $bg-color;
     padding: 0.3rem 0.6rem;
 
     i {
@@ -93,7 +94,7 @@
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: $breakpoint-md) {
   .custom-navbar {
     #navbarNav {
       padding: 20px;
