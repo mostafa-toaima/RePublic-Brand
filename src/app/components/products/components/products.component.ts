@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
 import { Perfume } from '../../../common/models/perfume.model';
 import { PerfumesService } from '../services/perfumes.service';
+import { ViewportScroller } from '@angular/common';
 
 @Component({
   selector: 'app-products',
@@ -32,18 +33,12 @@ export class ProductsComponent implements OnInit, OnDestroy {
   private destroy$ = new Subject<void>();
   private perfumeService = inject(PerfumesService);
 
-  constructor(private route: ActivatedRoute) { }
+  constructor(private route: ActivatedRoute, private viewportScroller: ViewportScroller) { }
 
   ngOnInit(): void {
     this.initializeComponent();
-  }
+    this.viewportScroller.scrollToPosition([0, 0])
 
-  getById(id: string): void {
-    this.perfumeService.getPerfumeById(id)
-      .pipe(takeUntil(this.destroy$))
-      .subscribe(perfume => {
-        console.log("perfume By Id", perfume);
-      });
   }
 
   ngOnDestroy(): void {

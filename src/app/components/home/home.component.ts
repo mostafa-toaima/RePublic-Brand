@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { NavigationEnd, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { Perfume } from '../../common/models/perfume.model';
-import { filter } from 'rxjs';
-import { PerfumesService } from '../products/services/perfumes.service';
 import { ViewportScroller } from '@angular/common';
 
 

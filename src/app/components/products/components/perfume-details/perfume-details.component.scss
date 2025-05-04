@@ -6,7 +6,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0, 0, 0, 0.8);
+  background-color: rgba($black-color, 0.8);
   backdrop-filter: blur(8px);
   z-index: 1050;
   display: flex;
@@ -27,9 +27,9 @@
   width: 90%;
   max-width: 1200px;
   max-height: 90vh;
-  background: linear-gradient(145deg, #ffffff 0%, #f8f8f8 100%);
+  background: linear-gradient(145deg, $white-color 0%, $bg-color 100%);
   border-radius: 20px;
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 20px 50px rgba($black-color, 0.3);
   display: grid;
   grid-template-columns: 1fr 1fr;
   overflow: hidden;
@@ -40,7 +40,7 @@
     transform: translateY(0);
   }
 
-  @media (max-width: 992px) {
+  @media (max-width: $breakpoint-lg) {
     grid-template-columns: 1fr;
     max-height: 90vh;
     overflow-y: auto;
@@ -53,7 +53,7 @@
   right: 5px;
   width: 40px;
   height: 40px;
-  background: rgba(0, 0, 0, 0.1);
+  background: rgba($black-color, 0.1);
   border: none;
   border-radius: 50%;
   display: flex;
@@ -66,11 +66,11 @@
   svg {
     width: 20px;
     height: 20px;
-    fill: #333;
+    fill: $text-color;
   }
 
   &:hover {
-    background: rgba(0, 0, 0, 0.2);
+    background: rgba($black-color, 0.2);
     transform: rotate(90deg);
   }
 }
@@ -82,7 +82,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, #f5f5f5 0%, #e9e9e9 100%);
+  background: linear-gradient(135deg, $bg-color 0%, $accent-color 100%);
 }
 
 .main-image {
@@ -93,15 +93,15 @@
   background-repeat: no-repeat;
   position: relative;
   transition: background-image 0.5s ease-in-out;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 20px rgba($black-color, 0.1);
   border-radius: 20px;
 
-  @media (max-width: 768px) {
+  @media (max-width: $breakpoint-md) {
     height: 300px;
   }
 
-  &:hover{
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+  &:hover {
+    box-shadow: 0 8px 30px rgba($black-color, 0.2);
     transform: scale(1.02);
   }
 }
@@ -119,24 +119,24 @@
   .nav-button {
     width: 50px;
     height: 50px;
-    background: rgba(255, 255, 255, 0.8);
+    background: rgba($white-color, 0.8);
     border: none;
     border-radius: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
     cursor: pointer;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 10px rgba($black-color, 0.1);
     transition: all 0.3s ease;
 
     svg {
       width: 24px;
       height: 24px;
-      fill: #333;
+      fill: $text-color;
     }
 
     &:hover {
-      background: white;
+      background: $white-color;
       transform: scale(1.1);
     }
 
@@ -160,7 +160,7 @@
   overflow-x: auto;
   padding: 10px 0;
 
-  @media (max-width: 768px) {
+  @media (max-width: $breakpoint-md) {
     gap: 10px;
     margin-top: 20px;
   }
@@ -175,20 +175,20 @@
   cursor: pointer;
   border: 2px solid transparent;
   transition: all 0.3s ease;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 8px rgba($black-color, 0.1);
 
-  @media (max-width: 768px) {
+  @media (max-width: $breakpoint-md) {
     width: 60px;
     height: 60px;
   }
 
   &:hover {
     transform: translateY(-5px);
-    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 8px 15px rgba($black-color, 0.15);
   }
 
   &.active {
-    border: 2px solid #9b59b6;
+    border: 2px solid $primary-color;
     transform: scale(1.05);
   }
 }
@@ -199,73 +199,57 @@
   display: flex;
   flex-direction: column;
 
-  @media (max-width: 992px) {
+  @media (max-width: $breakpoint-lg) {
     padding: 30px;
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: $breakpoint-md) {
     padding: 20px;
   }
 }
 
 .perfume-header {
   margin-bottom: 30px;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid $border-color;
   padding-bottom: 20px;
+  position: relative;
 
   .perfume-name {
     font-size: 2.2rem;
     font-weight: 700;
-    color: #2c3e50;
+    color: $text-color;
     margin: 0 0 5px 0;
     line-height: 1.2;
 
-    @media (max-width: 768px) {
+    @media (max-width: $breakpoint-md) {
       font-size: 1.8rem;
     }
   }
 
   .perfume-brand {
-      position: absolute;
-      background: $gold-color;
-      color: white;
-      padding: 4px 12px;
-      border-radius: 20px;
-      font-size: 12px;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  }
-
-  .perfume-origin {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    color: #7f8c8d;
-    font-size: 0.9rem;
-
-    svg {
-      width: 16px;
-      height: 16px;
-      fill: #7f8c8d;
-    }
+    position: absolute;
+    background: $gold-color;
+    color: $white-color;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: 0 2px 8px rgba($black-color, 0.1);
   }
 }
 
 .perfume-description {
   margin-bottom: 30px;
   line-height: 1.6;
-  color: #555;
+  color: $secondary-text;
 }
 
 .perfume-specs {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 20px;
   margin-bottom: 30px;
 
-.features {
+  .features {
     display: flex;
     flex-wrap: wrap;
     gap: 8px;
@@ -279,69 +263,17 @@
       border-radius: 20px;
       font-size: 0.75rem;
       color: $primary-color;
-
-      .feature-icon {
-        margin-right: 6px;
-        font-size: 0.8rem;
-      }
-    }
-  }
-  @media (max-width: 768px) {
-    grid-template-columns: 1fr;
-  }
-
-  .spec-item {
-    .spec-label {
-      display: block;
-      font-size: 0.8rem;
-      text-transform: uppercase;
-      color: #7f8c8d;
-      letter-spacing: 0.5px;
-      margin-bottom: 5px;
-    }
-
-    .spec-value {
-      font-size: 1rem;
-      color: #2c3e50;
-      font-weight: 500;
     }
   }
 }
 
 .price-section {
   margin-bottom: 30px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
 
   .price {
     font-size: 2rem;
     font-weight: 700;
     color: $text-color;
-  }
-
-  .size-options {
-    display: flex;
-    gap: 10px;
-
-    .size-option {
-      padding: 8px 15px;
-      background: #f5f5f5;
-      border: none;
-      border-radius: 20px;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      font-size: 0.9rem;
-
-      &:hover {
-        background: #e0e0e0;
-      }
-
-      &.selected {
-        background: #9b59b6;
-        color: white;
-      }
-    }
   }
 }
 
@@ -351,62 +283,35 @@
   margin-top: auto;
 
   .add-to-cart {
-      flex: 1;
-      padding: 15px;
-      background: $primary-color;
-      color: white;
-      border: none;
-      border-radius: 8px;
-      font-size: 1rem;
-      font-weight: 600;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      transition: all 0.3s ease;
-      box-shadow: 0 4px 15px rgba(155, 89, 182, 0.3);
-
-      svg {
-        width: 20px;
-        height: 20px;
-        fill: white;
-      }
-
-      &:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 8px 20px rgba(155, 89, 182, 0.4);
-      }
-
-      &:active {
-        transform: translateY(0);
-      }
-    }
-
-  .wishlist {
-    width: 50px;
-    background: #f5f5f5;
+    flex: 1;
+    padding: 15px;
+    background: $primary-color;
+    color: $white-color;
     border: none;
     border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
     cursor: pointer;
-    transition: all 0.3s ease;
     display: flex;
     align-items: center;
     justify-content: center;
+    gap: 10px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba($primary-color, 0.3);
 
     svg {
       width: 20px;
       height: 20px;
-      fill: #7f8c8d;
-      transition: fill 0.3s ease;
+      fill: $white-color;
     }
 
     &:hover {
-      background: #e0e0e0;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba($primary-color, 0.4);
+    }
 
-      svg {
-        fill: #e74c3c;
-      }
+    &:active {
+      transform: translateY(0);
     }
   }
 }

@@ -27,7 +27,7 @@
         </h2>
         <button
           class="btn btn-sm btn-outline-danger d-flex align-items-center gap-1"
-          (click)="resetFilters($event)" stopPropagation>
+          (click)="resetFilters($event)">
           <svg width="16" height="16" viewBox="0 0 24 24">
             <path
               d="M19 7l-.867 12.142A2 2 0 0 1 16.138 21H7.862a2 2 0 0 1-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v3m4.5-3.5l-5 5m5-5l-5-5"></path>
@@ -98,7 +98,7 @@
 
   <main class="container mb-5">
     <div *ngIf="isLoading" class="text-center py-5">
-      <div class="spinner-border text-primary mb-3 spinner-lg"></div>
+      <div class="spinner-border text-primary  mb-3 spinner-lg"></div>
       <p class="fs-5 text-muted">Loading fragrances...</p>
     </div>
     @if (!isLoading && displayedProducts.length > 0) {
@@ -124,19 +124,18 @@
     <nav class="d-flex justify-content-center mt-5">
       <ul class="pagination">
         <li class="page-item" [class.disabled]="currentPage === 1">
-          <a class="page-link" (click)="previousPage()"
+          <a class="page-link primaryColor" (click)="previousPage()"
             type="button">Previous</a>
         </li>
         <li class="page-item disabled">
           <span class="page-link">Page {{currentPage}} of {{totalPages}}</span>
         </li>
         <li class="page-item" [class.disabled]="currentPage === totalPages">
-          <a class="page-link" (click)="nextPage()" type="button">Next</a>
+          <a class="page-link primaryColor" (click)="nextPage()"
+            type="button">Next</a>
         </li>
       </ul>
     </nav>
     }
   </main>
 </div>
-
-<button (click)="getById('1DZL7UBOQmCXYsU43xXs')">Get BY Id</button>
