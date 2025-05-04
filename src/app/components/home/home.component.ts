@@ -3,6 +3,7 @@ import { NavigationEnd, Router } from '@angular/router';
 import { Perfume } from '../../common/models/perfume.model';
 import { filter } from 'rxjs';
 import { PerfumesService } from '../products/services/perfumes.service';
+import { ViewportScroller } from '@angular/common';
 
 
 @Component({
@@ -15,40 +16,23 @@ export class HomeComponent implements OnInit {
   isLoading = true;
 
   constructor(
-    private perfumeService: PerfumesService,
-    private router: Router
+    private router: Router,
+    private viewportScroller: ViewportScroller
   ) { }
 
   ngOnInit(): void {
-    this.perfumeService.getFeaturedPerfumes().subscribe(perfumes => {
-      this.featuredPerfumes = perfumes;
-      this.isLoading = false;
-    });
+    this.viewportScroller.scrollToPosition([0, 0])
+  }
 
-    this.router.events
-      .pipe(filter((event: any) => event instanceof NavigationEnd))
-      .subscribe(() => {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-        if (window.location.hash) {
-          setTimeout(() => {
-            document.querySelector(window.location.hash)?.scrollIntoView({
-              behavior: 'smooth'
-            });
-          }, 0);
-        }
-      });
+  exploreCollection() {
+    this.router.navigate(['/products']);
   }
 
   onCountrySelected(country: string): void {
     this.router.navigate(['/products'], { queryParams: { country } });
   }
 
-  exploreCollection() {
-    this.router.navigate(['/products']);
-  }
   exploreCollectionFor(type: string) {
     this.router.navigate(['/products'], { queryParams: { type } });
   }
-
-
 }

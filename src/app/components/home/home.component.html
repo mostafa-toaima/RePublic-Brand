@@ -1,6 +1,6 @@
 <div class="landing-container">
-  <div class="background-image"></div>
-  <div class="content">
+  <div class="background-image position-absolute top-0 end-0 w-100 z-1"></div>
+  <div class="content z-2 d-flex flex-column align-items-center justify-content-center">
     <h1 class="heading">Discover the World of Scents</h1>
     <p class="subheading">Premium fragrances from around the globe</p>
     <button class="cta-button" (click)="exploreCollection()">
@@ -18,8 +18,6 @@
         (countrySelected)="onCountrySelected($event)"></app-country-map>
     </div>
   </section>
-
-  <!-- Gender Categories Section -->
   <section class="gender-categories">
     <div class="category-card for-him">
       <div class="category-content">
@@ -39,10 +37,5 @@
           Women's Fragrances</button>
       </div>
     </div>
-  </section>
-
-  <section class="loading-section" *ngIf="isLoading">
-    <div class="spinner"></div>
-    <p>Loading fragrances...</p>
   </section>
 </div>

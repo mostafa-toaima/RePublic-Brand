@@ -1,21 +1,11 @@
-@import 'https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css';
+@import '../../../assets/styles/vars.scss';
 
-/* Variables */
-$gold: #B8860B;
-$gold-hover: #DAA520;
-$light-blue: #5F9EA0;
-$text-shadow-dark: rgba(0, 0, 0, 0.5);
-$text-shadow-deep: rgba(0, 0, 0, 0.6);
-$white-blur-bg: rgba(255, 255, 255, 0.2);
-$white-blur-hover: rgba(255, 255, 255, 0.3);
-
-/* Base Styles */
 .landing-container,
 .home-container {
   position: relative;
   width: 100%;
   overflow: hidden;
-  color: white;
+  color: $white-color;
   text-align: center;
 }
 
@@ -23,16 +13,11 @@ $white-blur-hover: rgba(255, 255, 255, 0.3);
   height: 100vh;
 
   .background-image {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
     height: 114%;
     background-image: url('../../../assets/images/hero1.jpg');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
-    z-index: 1;
     animation: zoomEffect 15s ease infinite alternate;
   }
 }
@@ -43,10 +28,6 @@ $white-blur-hover: rgba(255, 255, 255, 0.3);
   padding: 20px;
   max-width: 800px;
   margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
   height: 100%;
 
   .heading {
@@ -67,8 +48,8 @@ $white-blur-hover: rgba(255, 255, 255, 0.3);
   .cta-button {
     background: $white-blur-bg;
     backdrop-filter: blur(10px);
-    border: 2px solid white;
-    color: white;
+    border: 2px solid $white-color;
+    color: $white-color;
     padding: 15px 40px;
     font-size: 1.2rem;
     border-radius: 50px;
@@ -86,16 +67,16 @@ $white-blur-hover: rgba(255, 255, 255, 0.3);
 .map-section {
   padding: 60px 20px;
   text-align: center;
-  background: linear-gradient(135deg, #f5f7fa 0%, #e4e8eb 100%);
+  background: $bg-color;
   border-radius: 12px;
   margin: 40px 20px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 10px 30px rgba($black-color, 0.08);
   position: relative;
   overflow: hidden;
 
   h2 {
     font-size: 2.5rem;
-    color: #2c3e50;
+    color: $text-color;
     margin-bottom: 15px;
     position: relative;
     z-index: 1;
@@ -104,7 +85,7 @@ $white-blur-hover: rgba(255, 255, 255, 0.3);
 
   .section-description {
     font-size: 1.1rem;
-    color: #7f8c8d;
+    color: $light-text;
     max-width: 700px;
     margin: 0 auto 40px;
     position: relative;
@@ -117,12 +98,12 @@ $white-blur-hover: rgba(255, 255, 255, 0.3);
     border: none;
     border-radius: 12px;
     overflow: auto;
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 8px 25px rgba($black-color, 0.15);
     max-width: 1000px;
     position: relative;
     z-index: 1;
     transition: transform 0.3s ease;
-    background: white;
+    background: $white-color;
 
     &:hover {
       transform: translateY(-5px);
@@ -130,7 +111,6 @@ $white-blur-hover: rgba(255, 255, 255, 0.3);
   }
 }
 
-/* Gender Categories Section */
 .gender-categories {
   display: flex;
   justify-content: center;
@@ -145,12 +125,12 @@ $white-blur-hover: rgba(255, 255, 255, 0.3);
     height: 400px;
     border-radius: 16px;
     overflow: hidden;
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 15px 35px rgba($black-color, 0.1);
     transition: transform 0.4s ease, box-shadow 0.4s ease;
 
     &:hover {
       transform: translateY(-10px);
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+      box-shadow: 0 20px 40px rgba($black-color, 0.15);
     }
 
     &::before {
@@ -160,7 +140,7 @@ $white-blur-hover: rgba(255, 255, 255, 0.3);
       left: 0;
       width: 100%;
       height: 100%;
-      background: linear-gradient(to bottom, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.7) 100%);
+      background: linear-gradient(to bottom, rgba($black-color, 0.1) 0%, rgba($black-color, 0.7) 100%);
       z-index: 1;
     }
 
@@ -173,26 +153,26 @@ $white-blur-hover: rgba(255, 255, 255, 0.3);
       justify-content: flex-end;
       padding: 40px;
       text-align: left;
-      color: white;
+      color: $white-color;
 
       h3 {
         font-size: 2.5rem;
         margin-bottom: 10px;
-        text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+        text-shadow: 1px 1px 3px rgba($black-color, 0.5);
       }
 
       p {
         font-size: 1.2rem;
         margin-bottom: 25px;
-        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        text-shadow: 1px 1px 2px rgba($black-color, 0.5);
       }
     }
 
     .category-btn {
-      background: rgba(255, 255, 255, 0.2);
+      background: rgba($white-color, 0.2);
       backdrop-filter: blur(5px);
-      border: 1px solid white;
-      color: white;
+      border: 1px solid $white-color;
+      color: $white-color;
       padding: 12px 30px;
       font-size: 1rem;
       border-radius: 30px;
@@ -201,7 +181,7 @@ $white-blur-hover: rgba(255, 255, 255, 0.3);
       align-self: flex-start;
 
       &:hover {
-        background: rgba(255, 255, 255, 0.3);
+        background: rgba($white-color, 0.3);
         transform: translateY(-3px);
       }
     }
@@ -216,33 +196,6 @@ $white-blur-hover: rgba(255, 255, 255, 0.3);
   }
 }
 
-/* Loading Section */
-.loading-section {
-  text-align: center;
-  padding: 60px 0;
-
-  .spinner {
-    border: 6px solid rgba(0, 0, 0, 0.1);
-    border-radius: 50%;
-    border-top: 6px solid $light-blue;
-    width: 60px;
-    height: 60px;
-    animation: spin 1s linear infinite;
-    margin: 0 auto 20px;
-  }
-}
-
-/* Animations */
-@keyframes spin {
-  0% {
-    transform: rotate(0deg);
-  }
-
-  100% {
-    transform: rotate(360deg);
-  }
-}
-
 @keyframes zoomEffect {
   0% {
     transform: scale(1);
@@ -254,7 +207,7 @@ $white-blur-hover: rgba(255, 255, 255, 0.3);
 }
 
 /* Responsive */
-@media (max-width: 1200px) {
+@media (max-width: $breakpoint-xl) {
   .gender-categories {
     flex-direction: column;
     align-items: center;
@@ -265,7 +218,7 @@ $white-blur-hover: rgba(255, 255, 255, 0.3);
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: $breakpoint-md) {
   .content {
     .heading {
       font-size: 2.5rem !important;
@@ -305,7 +258,7 @@ $white-blur-hover: rgba(255, 255, 255, 0.3);
   }
 }
 
-@media (max-width: 576px) {
+@media (max-width: $breakpoint-sm) {
   .content {
     .heading {
       font-size: 2rem !important;

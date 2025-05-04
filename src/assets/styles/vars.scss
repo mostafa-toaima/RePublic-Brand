@@ -14,10 +14,19 @@ $success-color: #28a745;
 $disabled-color: #cccccc;
 $dark-bg: #1a1a1a;
 $gold-hover: #DAA520;
+$light-blue: #5F9EA0;
+
+$text-shadow-dark: rgba(0, 0, 0, 0.5);
+$text-shadow-deep: rgba(0, 0, 0, 0.6);
+$white-blur-bg: rgba(255, 255, 255, 0.2);
+$white-blur-hover: rgba(255, 255, 255, 0.3);
 
 
-// Breakpoints
 $breakpoint-sm: 576px;
 $breakpoint-md: 768px;
 $breakpoint-lg: 992px;
 $breakpoint-xl: 1200px;
+
+
+
+
